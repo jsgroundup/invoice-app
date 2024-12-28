@@ -23,7 +23,6 @@
       --pending-color: 255, 143, 0;
       --success-color: 51, 214, 159;
       --light-neutral-color: 249, 250, 254;
-      --sidebar-color: 55, 59, 83;
       --white: 255, 255, 255;
     }
 
@@ -32,24 +31,32 @@
     [data-theme="light"]{
       --page-bg: rgb(var(--light-bg));
       --text-color: rgb(var(--base-black));
-      --grey-color: rgb(var(--light-grey));
+      --dark-grey-color: rgb(var(--dark-grey));
+      --light-grey-color: rgb(var(--light-grey));
       --neutral-color: rgb(var(--light-neutral-color));
       --white-color: rgb(var(--white));
+      --sidebar-color: rgb(55, 59, 83);
 
     }
 
     [data-theme="dark"]{
       --page-bg: rgb(var(--dark-bg));
       --text-color: rgb(var(--white));
-      --grey-color: rgb(var(--dark-grey));
+      --dark-grey-color: rgb(var(--white));
+      --light-grey-color: rgb(var(--light-grey));
       --neutral-color: rgb(var(--light-secondary-color));
       --white-color: rgb(var(--secondary-color));
+      --sidebar-color: rgb(var(--light-grey));
 
     }
 
 
     *{
       box-sizing: border-box;
+      color: var(--text-color);
+      transition-property: all;
+      transition-duration: .3s;
+      transition-timing-function: ease-in;
     }
 
     /* Font faces */
@@ -81,30 +88,37 @@
       font-family: 'Spartan', sans-serif;
       font-weight: 400;
       background-color: var(--page-bg);
-      font-size: 16px;
-      color: var(--text-color);
+      font-size: 15px;
     }
 
 
     /* Common styles */
-    .text-heading{
-      font-weight: bold;
-    }
-
     .text-lg{
-      font-size: 28px;
+      font-size: 24px;
     }
 
     .text-md{
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .text{
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .text-sm{
-      font-size: 14px;
+      font-size: 12px;
+    }
+
+    .light-grey{
+      color: var(--light-grey-color);
+    }
+
+    .dark-grey{
+      color: var(--dark-grey-color);
+    }
+
+    .text-bold{
+      font-weight: bold;
     }
 
   </style>
