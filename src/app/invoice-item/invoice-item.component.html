@@ -1,1 +1,21 @@
-<button>invoice-item works!</button>
+<button class="flex-row">
+  <div class="details flex-row">
+    <div>
+      <span class="text-bold column">
+        <span class="dark-grey">#</span> <span>RT3080</span>
+      </span>
+      <span class="light-grey column text-sm">Due  19 Aug 2021</span>
+      <span class="dark-grey column text-sm">Jensen Huang</span>
+    </div>
+
+    <div class="text-bold">£ 1,800.90</div>
+  </div>
+
+  <div class="flex-row">
+    <div class="status paid flex-row">
+      <span class="point"></span>
+      <span class="status-text text-sm">Paid</span>
+    </div>
+    <div app-icon name="arrow-right"></div>
+  </div>
+</button>
