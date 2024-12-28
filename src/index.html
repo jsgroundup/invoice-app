@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <title>Invoice</title>
@@ -20,15 +20,93 @@
       --error-color: 236, 87, 87;
       --light-error-color: 255, 151, 151;
       --light-bg: 248, 248, 251;
+      --pending-color: 255, 143, 0;
+      --success-color: 51, 214, 159;
+      --light-neutral-color: 249, 250, 254;
+      --sidebar-color: 55, 59, 83;
+      --white: 255, 255, 255;
     }
+
+    /* Derived styles */
+
+    [data-theme="light"]{
+      --page-bg: rgb(var(--light-bg));
+      --text-color: rgb(var(--base-black));
+      --grey-color: rgb(var(--light-grey));
+      --neutral-color: rgb(var(--light-neutral-color));
+      --white-color: rgb(var(--white));
+
+    }
+
+    [data-theme="dark"]{
+      --page-bg: rgb(var(--dark-bg));
+      --text-color: rgb(var(--white));
+      --grey-color: rgb(var(--dark-grey));
+      --neutral-color: rgb(var(--light-secondary-color));
+      --white-color: rgb(var(--secondary-color));
+
+    }
+
 
     *{
       box-sizing: border-box;
     }
 
+    /* Font faces */
+
+     @font-face {
+        font-family: 'Spartan';
+        src: url('assets/fonts/static/LeagueSpartan-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Spartan';
+        src: url('assets/fonts/static/LeagueSpartan-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Spartan';
+        src: url('assets/fonts/static/LeagueSpartan-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+
     body{
       margin: 0;
+      font-family: 'Spartan', sans-serif;
+      font-weight: 400;
+      background-color: var(--page-bg);
+      font-size: 16px;
+      color: var(--text-color);
     }
+
+
+    /* Common styles */
+    .text-heading{
+      font-weight: bold;
+    }
+
+    .text-lg{
+      font-size: 28px;
+    }
+
+    .text-md{
+      font-size: 20px;
+    }
+
+    .text{
+      font-size: 16px;
+    }
+
+    .text-sm{
+      font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
