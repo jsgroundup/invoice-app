@@ -1,0 +1,17 @@
+
+ :host{
+  list-style: none;
+  background-color: red;
+  border-radius: 8px;
+  background-color: var(--white-color);
+  margin-top: 15px;
+ }
+ button {
+   padding: 10px 20px;
+   display: block;
+   border: none;
+   width: 100%;
+   text-align: start;
+   background-color: transparent;
+   cursor: pointer;
+ }
