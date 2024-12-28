@@ -5,6 +5,7 @@
   width: 103px;
   position: fixed;
   overflow: hidden;
+  transition: none;
   background-size: cover;
   background-repeat: no-repeat;
   border-top-right-radius: 20px;
