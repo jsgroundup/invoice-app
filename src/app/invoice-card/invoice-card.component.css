@@ -1,0 +1,56 @@
+:host{
+  width: inherit;
+}
+
+
+.back-button {
+  display: flex;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.back-button-text {
+  margin-left: 20px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-container {
+  margin: 20px 0px;
+}
+
+.action-bar {
+  background-color: var(--white-color);
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.action-bar-text {
+  margin-right: 15px;
+}
+
+.action-button {
+  margin-left: 15px;
+}
+
+
+ @media screen and (max-width: 510px) {
+  .actions{
+    display: none;
+  }
+  .status{
+    width: 100%;
+  }
+  .action-bar{
+    padding: 15px 15px;
+  }
+ }

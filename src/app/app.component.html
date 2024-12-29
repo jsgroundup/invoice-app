@@ -1,5 +1,97 @@
 <style>
 
+h2{
+  margin: 30px 0px 8px;
+}
+
+.flex-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.app-button{
+  padding: 7px 10px;
+  border-radius: 20px;
+  background-color: rgb(var(--primary-color));
+  cursor: pointer;
+  border: none;
+}
+
+.app-button:hover{
+   background-color: rgb(var(--light-primary-color));
+}
+
+.app-button .button-text{
+  color: rgb(var(--white));
+  margin-left: 6px;
+}
+
+.filter-button{
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+  cursor: pointer;
+  padding: 8px 10px;
+  position: relative;
+}
+
+.filter-text{
+  margin-right: 8px;
+}
+.plus-icon-container{
+  width: 20px;
+  height: 20px;
+  background-color: rgb(var(--white));
+  border-radius: 50%;
+  padding-left: 1px;
+}
+
+.filter-dropdown-menu{
+  padding: 10px;
+  border-radius: 6px;
+  background-color: var(--white-color);
+  width: 140px;
+  height: 100px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-left: -10px;
+  border: 1px solid var(--neutral-color);
+  box-shadow: 0px 12px 18px -1px rgba(var(--side-bar), 0.2);
+  cursor: auto;
+}
+
+.filter-button:hover .filter-dropdown-menu{
+  /* box-shadow: 0px 12px 18px -1px rgba(var(--side-bar), 0.2); */
+}
+
+.checkmark{
+  border: none;
+  cursor: pointer;
+  padding: 5px 2px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  width: 100%;
+}
+
+.checkmark-icon{
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: var(--grey-bg);
+  margin-right: 8px;
+  border: 1.5px solid transparent;
+}
+
+.checkmark:hover .checkmark-icon{
+  border: 1.5px solid rgb(var(--primary-color));
+}
+
+.checkmark.selected .checkmark-icon{
+  background-color: rgb(var(--primary-color));
+}
 
 
 </style>
@@ -7,15 +99,61 @@
 
 <header app-header></header>
 
-<main>
+<main *ngIf="!detailsView">
+  <div class="content-head">
+      <div>
+        <h2 class="text-lg text-bold">Invoices</h2>
+        <div class="dark-grey text-sm">There are 4 pending invoices</div>
 
-  <ul>
+      </div>
 
-    <li invoice-listitem></li>
-    <li invoice-listitem></li>
-    <li invoice-listitem></li>
+      <div class="flex-row">
+          <button class="filter-button flex-row">
+            <span class="text-sm text-bold filter-text">Filter by status</span>
+            <span app-icon name='arrow-down'></span>
+            <div class="filter-dropdown-menu">
+                <button class="checkmark selected">
+                  <span class="checkmark-icon" app-icon name="check" ></span>
+                  <span class="checkmark-text text-sm font-medium">Draft</span>
+                </button>
+                <button class="checkmark">
+                  <span class="checkmark-icon"></span>
+                  <span class="checkmark-text text-sm font-medium">Pending</span>
+                </button>
+                <button class="checkmark">
+                  <span class="checkmark-icon"></span>
+                  <span class="checkmark-text text-sm font-medium">Paid</span>
+                </button>
+            </div>
+          </button>
 
-  </ul>
+          <button class="app-button flex-row">
+            <span app-icon name="plus" class="plus-icon-container"></span>
+            <span class="button-text text-sm">New Invoice</span>
+          </button>
+      </div>
+  </div>
 
+  @if (!isEmpty) {
+    <ul>
 
+      <li invoice-listitem status="paid"></li>
+      <li invoice-listitem status="pending"></li>
+      <li invoice-listitem status="draft"></li>
+
+    </ul>
+  }
+  @else {
+    <div>
+        <img aria-hidden="true" alt="Empty illustration image" src="../assets/images/illustration-empty.svg" />
+        <p class="text-lg text-bold">There is nothing here</p>
+        <div class="dark-grey text-sm" style="margin-bottom: 6px;text-align: center;"> Create an invoice by clicking the </div>
+        <div class="dark-grey text-sm" style="text-align: center;"><span class="text-bold dark-grey">New Invoice</span> button and get started</div>
+    </div>
+  }
+
+</main>
+
+<main *ngIf="detailsView">
+  <invoice-card />
 </main>

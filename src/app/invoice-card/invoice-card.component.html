@@ -1,0 +1,28 @@
+
+<style>
+
+
+
+</style>
+
+<button class="back-button">
+  <span app-icon name="arrow-left"></span>
+  <span class="text-sm text-bold back-button-text">Go back</span>
+</button>
+
+<div class="card-container">
+
+  <div class="action-bar flex-row">
+    <div class="flex-row status">
+      <span class="text-sm dark-grey action-bar-text">Status</span>
+      <status-badge badge='pending' />
+    </div>
+
+    <div class="flex-row actions">
+      <button class="action-button" app-button buttonType="neutral" title="Edit" ></button>
+      <button class="action-button" app-button buttonType="danger" title="Delete" ></button>
+      <button class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
+    </div>
+
+  </div>
+</div>
