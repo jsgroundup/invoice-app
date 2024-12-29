@@ -1,1 +1,31 @@
+<style>
+  .profile{
+    overflow: hidden;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 15px;
+  }
+  .profile img{
+    width: inherit;
+    height: inherit;
+    border-radius: 50%;
+    display: block;
+  }
 
+
+</style>
+<button
+  (click)="toggleTheme()"
+  [attr.aria-label]="isLightMode?'Switch to dark mode': 'Switch to light mode'"
+  app-icon [name]="isLightMode?'moon':'sun'"
+>
+Change theme
+</button>
+
+
+<div class="divider"></div>
+
+<button aria-label="My profile" class="profile">
+  <img src="../../assets/images/image-avatar.jpg" alt="Profile image"/>
+</button>
