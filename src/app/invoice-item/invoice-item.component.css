@@ -89,3 +89,20 @@
  .status.draft .status-text {
    color: var(--sidebar-color);
  }
+
+ .screen-large {
+   display: flex;
+ }
+
+ .screen-small {
+   display: none;
+ }
+
+ @media screen and (max-width: 510px) {
+  .screen-large{
+    display: none;
+  }
+  .screen-small {
+    display: block;
+  }
+ }

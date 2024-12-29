@@ -1,10 +1,10 @@
-<button class="flex-row">
+<button class="flex-row screen-large">
   <div class="details flex-row">
     <div>
       <span class="text-bold column">
         <span class="dark-grey">#</span> <span>RT3080</span>
       </span>
-      <span class="light-grey column text-sm">Due  19 Aug 2021</span>
+      <span class="dark-grey column text-sm">Due  19 Aug 2021</span>
       <span class="dark-grey column text-sm">Jensen Huang</span>
     </div>
 
@@ -12,10 +12,24 @@
   </div>
 
   <div class="flex-row">
-    <div class="status paid flex-row">
-      <span class="point"></span>
-      <span class="status-text text-sm">Paid</span>
-    </div>
+    <status-badge [badge]="status" />
     <div app-icon name="arrow-right"></div>
+  </div>
+</button>
+
+<button class="screen-small">
+  <div class="flex-row" style="margin-bottom: 15px;">
+    <span class="text-bold column">
+      <span class="dark-grey">#</span> <span>RT3080</span>
+    </span>
+    <span class="dark-grey column text-sm">Jensen Huang</span>
+  </div>
+
+  <div class="flex-row">
+    <div>
+      <div class="dark-grey column text-sm" style="margin-bottom: 6px;">Due  19 Aug 2021</div>
+      <div class="text-bold text-md">£ 1,800.90</div>
+    </div>
+    <status-badge [badge]="status" />
   </div>
 </button>
