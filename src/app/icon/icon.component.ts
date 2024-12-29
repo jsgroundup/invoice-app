@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './icon.component.css',
 })
 export class IconComponent {
-  @Input({}) name?: 'arrow-right';
+  @Input({required: true}) name!: 'arrow-left' | 'arrow-right' | 'arrow-down' | 'plus' | 'check'| 'moon'| 'sun';
 }
