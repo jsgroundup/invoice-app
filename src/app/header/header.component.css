@@ -29,12 +29,27 @@ button{
   cursor: pointer;
 }
 
- .divider {
-   border-top: 1px solid #494E6E;
-   width: 100%;
-   margin: 0px;
-   margin-top: 16px;
- }
+.divider {
+  border-top: 1px solid #494E6E;
+  width: 100%;
+  margin: 0px;
+  margin-top: 16px;
+}
+
+.profile {
+  overflow: hidden;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 15px;
+}
+
+.profile img {
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  display: block;
+}
 
 @media screen and (max-width: 830px) {
   :host {
