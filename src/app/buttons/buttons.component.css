@@ -24,10 +24,18 @@
   background-color: var(--neutral-color);
 }
 
+:host.neutral:hover{
+  background-color: rgb(var(--light-grey));
+}
+
 :host .button-text {
   color: rgb(var(--white));
 }
 
 :host.neutral .button-text{
   color: var(--dark-grey-color);
+}
+
+:host.neutral:hover .button-text{
+  color: rgb(var(--dark-grey));
 }
