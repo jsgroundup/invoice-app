@@ -17,6 +17,10 @@
   margin-left: 20px;
 }
 
+.back-button:hover .back-button-text{
+  color: var(--dark-grey-color);
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -32,6 +36,7 @@
   background-color: var(--white-color);
   border-radius: 8px;
   padding: 10px 15px;
+  margin-bottom: 20px;
 }
 
 .action-bar-text {
@@ -43,6 +48,73 @@
 }
 
 
+.details-container{
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--white-color);
+}
+
+.details-text{
+  margin-bottom: 6px;
+}
+
+.details-top-details{
+  flex-flow: wrap;
+}
+
+.details{
+  margin-bottom: 40px;
+  flex-flow: wrap;
+  align-items: flex-start;
+}
+
+.details .column{
+  margin-top: 30px;
+}
+
+.price-details{
+  background-color: var(--neutral-color);
+  padding: 30px 0px 0px;
+  margin: 0px 10px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.price-details-item{
+  padding: 0px 20px;
+  margin-bottom: 20px;
+}
+
+.right-columns{
+  width: 60%;
+}
+.price-details-item .column{
+  margin-left: 15px;
+  /* justify-self: flex-end; */
+  justify-items: flex-end;
+}
+
+.price-total{
+  padding: 20px;
+  background-color: rgb(var(--dark-bg));
+}
+
+.price-total .amount{
+  color: rgb(var(--white));
+}
+
+.screen-large {
+  display: block;
+}
+
+.screen-large-flex{
+  display: flex;
+}
+
+.screen-small {
+  display: none;
+}
+
  @media screen and (max-width: 510px) {
   .actions{
     display: none;
@@ -52,5 +124,18 @@
   }
   .action-bar{
     padding: 15px 15px;
+  }
+
+  .screen-large {
+    display: none;
+  }
+  .screen-large-flex{
+    display: none;
+  }
+  .screen-small {
+    display: block;
+  }
+  .right-columns{
+    width: auto;
   }
  }
