@@ -24,6 +24,7 @@
       --success-color: 51, 214, 159;
       --light-neutral-color: 249, 250, 254;
       --white: 255, 255, 255;
+      --side-bar: 55, 59, 83;
     }
 
     /* Derived styles */
@@ -36,6 +37,7 @@
       --neutral-color: rgb(var(--light-neutral-color));
       --white-color: rgb(var(--white));
       --sidebar-color: rgb(55, 59, 83);
+      --grey-bg: rgb(var(--light-grey));
 
     }
 
@@ -47,16 +49,8 @@
       --neutral-color: rgb(var(--light-secondary-color));
       --white-color: rgb(var(--secondary-color));
       --sidebar-color: rgb(var(--light-grey));
+      --grey-bg: rgb(var(--dark-bg));
 
-    }
-
-
-    *{
-      box-sizing: border-box;
-      color: var(--text-color);
-      transition-property: all;
-      transition-duration: .3s;
-      transition-timing-function: ease-in;
     }
 
     /* Font faces */
@@ -83,9 +77,17 @@
     }
 
 
+     *{
+        box-sizing: border-box;
+        color: var(--text-color);
+        transition-property: all;
+        transition-duration: .3s;
+        transition-timing-function: ease-in;
+        font-family: 'Spartan', sans-serif;
+    }
+
     body{
       margin: 0;
-      font-family: 'Spartan', sans-serif;
       font-weight: 400;
       background-color: var(--page-bg);
       font-size: 15px;
@@ -119,6 +121,10 @@
 
     .text-bold{
       font-weight: bold;
+    }
+
+    .font-medium{
+      font-weight: 500;
     }
 
   </style>
