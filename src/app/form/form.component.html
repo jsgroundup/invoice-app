@@ -1,5 +1,4 @@
-<button aria-label="Close dialog" class="form-overlay"></button>
-
+<app-popup-overlay />
 <form>
   <section class="form-content-container">
     <h3 class="text-lg text-bold">New Invoices</h3>
@@ -110,8 +109,14 @@
       <button class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
     </div>
 
-    <div>
-
+    <div class="actions flex-row">
+      <div>
+        <button app-button buttonType="neutral" title="Discard">Discard</button>
+      </div>
+      <div>
+        <button app-button buttonType="neutral" title="Save as Draft" style="margin-right: 10px;">Save as Draft</button>
+        <button app-button buttonType="default" title="Save & Send">Save & Send</button>
+      </div>
     </div>
   </section>
 </form>

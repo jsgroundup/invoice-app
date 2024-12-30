@@ -8,14 +8,6 @@
   align-items: center;
 }
 
-.form-overlay{
-  display: block;
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: none;
-}
-
 form{
   position: fixed;
   left: 0; top: 0;
@@ -32,6 +24,7 @@ form{
 
 .form-content-container{
   padding: 15px 30px 20px;
+  position: relative;
 }
 
 .form-head{
@@ -62,6 +55,14 @@ input{
   font-size: 15px;
   width: 100%;
   outline: none;
+}
+
+input:focus{
+  border: 1.5px solid rgb(var(--primary-color));
+}
+
+input.error, input.error:focus{
+  border: 1.5px solid rgb(var(--error-color));
 }
 
 input.text-sm{
@@ -114,12 +115,26 @@ input.text-sm{
 
 .new-item-button-container{
   justify-content: center;
+  margin-bottom: 20px;
 }
 .new-item-button{
   width: 97%;
   padding-top: 13px;
   padding-bottom: 13px;
   margin-top: 10px;
+}
+
+
+.actions{
+  justify-content: space-between;
+  padding: 25px 15px;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--form-bg);
+  margin: 0;
+  width: 100%;
 }
 
 @keyframes form-entry {
