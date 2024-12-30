@@ -2,18 +2,47 @@ import { Component } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { StatusBadgeComponent } from '../status-badge/status-badge.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
+import { Store } from '@ngrx/store';
+import { AppStore } from '../../store';
+import { Observable } from 'rxjs';
+import { Invoice } from '../../data/data';
+import { selectAllInvoices, selectInvoice } from '../../store/selectors/invoice';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'invoice-card',
   standalone: true,
-  imports: [IconComponent, StatusBadgeComponent, ButtonsComponent],
+  imports: [AsyncPipe, IconComponent, StatusBadgeComponent, ButtonsComponent],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.css',
 })
 export class InvoiceCardComponent {
-  constructor(private route: Router, public globalService: GlobalService) {}
+  invoiceData?: Observable<Invoice>;
+
+  constructor(
+    private route: Router,
+    router: ActivatedRoute,
+    public globalService: GlobalService,
+    private store: Store<AppStore>
+  ) {
+    router.params.subscribe(({ id }) => {
+      this.invoiceData = this.store.select(selectInvoice({ id }));
+    });
+  }
+
+  formatDate(date?: string) {
+    return new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(new Date(date as string));
+  }
+
+  formatAmount(amount?: number) {
+    return (amount as number).toFixed(2);
+  }
 
   onClick() {
     this.route.navigateByUrl('/');

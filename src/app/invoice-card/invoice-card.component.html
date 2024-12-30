@@ -9,7 +9,7 @@
   <div class="action-bar flex-row">
     <div class="flex-row status">
       <span class="text-sm dark-grey action-bar-text">Status</span>
-      <status-badge badge='pending' />
+      <status-badge [badge]="(invoiceData|async)?.status||'draft'" />
     </div>
 
     <div class="flex-row actions">
@@ -23,15 +23,15 @@
     <div class="flex-row details-top-details">
       <div>
           <div class="text-bold details-text column" style="margin-bottom: 8px;">
-            <span class="dark-grey">#</span> <span>RT3080</span>
+            <span class="dark-grey">#</span> <span>{{(invoiceData|async)?.id}}</span>
           </div>
-          <div class="details-text dark-grey text-sm">Graphic Design</div>
+          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.description}}</div>
       </div>
       <div>
-        <div class="details-text dark-grey text-sm">19 Union Terrace</div>
-        <div class="details-text dark-grey text-sm">London</div>
-        <div class="details-text dark-grey text-sm">E1 3EZ</div>
-        <div class="details-text dark-grey text-sm">United Kingdom</div>
+        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.street}}</div>
+        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.city}}</div>
+        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.postCode}}</div>
+        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.country}}</div>
       </div>
     </div>
 
@@ -39,62 +39,54 @@
         <div class="column">
           <div>
             <div class="details-text dark-grey text-sm">Invoice Date</div>
-            <div class="details-text text-md text-bold">21 Aug 2021</div>
+            <div class="details-text text-md text-bold">{{formatDate((invoiceData|async)?.createdAt)}}</div>
           </div>
           <div style="margin-top: 30px;">
             <div class="details-text dark-grey text-sm">Payment Due</div>
-            <div class="details-text text-md text-bold">20 Sep 2021</div>
+            <div class="details-text text-md text-bold">{{formatDate((invoiceData|async)?.paymentDue)}}</div>
           </div>
         </div>
         <div class="column">
           <div class="details-text dark-grey text-sm">Bill To</div>
-          <div class="details-text text-md text-bold">Alex Grim</div>
-          <div class="details-text dark-grey text-sm">84 Church Way</div>
-          <div class="details-text dark-grey text-sm">Bradford</div>
-          <div class="details-text dark-grey text-sm">BD1 9PB</div>
-          <div class="details-text dark-grey text-sm">United Kingdom</div>
+          <div class="details-text text-md text-bold">{{(invoiceData|async)?.clientName}}</div>
+          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.street}}</div>
+          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.city}}</div>
+          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.postCode}}</div>
+          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.country}}</div>
         </div>
         <div class="column">
           <div>
             <div class="details-text dark-grey text-sm">Sent To</div>
-            <div class="details-text text-md text-bold">alexgrim{{'@'}}mail.com</div>
+            <div class="details-text text-md text-bold">{{(invoiceData|async)?.clientEmail}}</div>
           </div>
         </div>
     </div>
 
     <div class="price-details">
-      <div class="price-details-item flex-row screen-large-flex">
-        <div class="dark-grey text-sm">Item Name</div>
-        <div class="right-columns flex-row">
-          <div class="column dark-grey text-sm">QTY</div>
-          <div class="column dark-grey text-sm">Price</div>
-          <div class="column dark-grey text-sm">Total</div>
-        </div>
+      <div class="grid-item-container price-details-item screen-large-grid">
+        <div class="grid-item-1 dark-grey text-sm">Item Name</div>
+        <!-- <div class="right-columns flex-row"> -->
+          <div class="grid-item-2 column dark-grey text-sm">QTY</div>
+          <div class="grid-item-3 column dark-grey text-sm">Price</div>
+          <div class="grid-item-4 column dark-grey text-sm">Total</div>
+        <!-- </div> -->
       </div>
 
-      <div class="price-details-item flex-row">
-        <div>
-          <div class="font-medium details-text">Banner Design</div>
-          <div class="details-text dark-grey font-medium screen-small">1 x £ 156.00</div>
+      @for (item of (invoiceData|async)?.items; track item.name) {
+        <div class="grid-item-container price-details-item">
+          <div class="grid-item-1">
+            <div class="font-medium details-text">{{item.name}}</div>
+            <div class="details-text dark-grey font-medium screen-small">{{item.quantity}} x £ {{formatAmount(item.price)}}</div>
+          </div>
+          <!-- <div class="right-columns flex-row"> -->
+            <div class="grid-item-2 text-sm column dark-grey font-medium screen-large">{{item.quantity}}</div>
+            <div class="grid-item-3 text-sm column dark-grey font-medium screen-large">£ {{formatAmount(item.price)}}</div>
+            <div class="grid-item-4 text-smolumn font-medium">£ {{formatAmount(item.total)}}</div>
+          <!-- </div> -->
         </div>
-        <div class="right-columns flex-row">
-          <div class="column dark-grey font-medium screen-large">1</div>
-          <div class="column dark-grey font-medium screen-large">£ 156.00</div>
-          <div class="column font-medium">£ 156.00</div>
-        </div>
-      </div>
+      }
 
-      <div class="price-details-item flex-row">
-        <div>
-          <div class="font-medium details-text">Email Design</div>
-          <div class="details-text dark-grey font-medium screen-small">2 x £ 200.00</div>
-        </div>
-        <div class="right-columns flex-row">
-          <div class="column dark-grey font-medium screen-large">2</div>
-          <div class="column dark-grey font-medium screen-large">£ 200.00</div>
-          <div class="column font-medium">£ 400.00</div>
-        </div>
-      </div>
+
 
       <div class="price-total flex-row">
         <div class="text-sm light-grey">Amount Due</div>
