@@ -12,6 +12,7 @@ import { Invoice } from '../data/data';
 import { Store } from '@ngrx/store';
 import { AppStore } from '../store';
 import { selectAllInvoices } from '../store/selectors/invoice';
+import { GlobalService } from './services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit{
   viewAsHompage: boolean = true
 
 
-  constructor(private store: Store<AppStore>, private route: ActivatedRoute) {
+  constructor(private store: Store<AppStore>, private route: ActivatedRoute, public globalService: GlobalService) {
 
     this.invoices$ = this.store.select(selectAllInvoices);
 

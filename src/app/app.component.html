@@ -157,7 +157,7 @@ h2{
 <main *ngIf="!viewAsHompage">
 
   <invoice-card />
-  <app-form *ngIf="showForm" />
-  <app-dialog *ngIf="showDialog" />
+  <app-form *ngIf="globalService.editing" />
+  <app-dialog *ngIf="globalService.deleting" />
 
 </main>

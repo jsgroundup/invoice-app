@@ -13,8 +13,8 @@
     </div>
 
     <div class="flex-row actions">
-      <button class="action-button" app-button buttonType="neutral" title="Edit" ></button>
-      <button class="action-button" app-button buttonType="danger" title="Delete" ></button>
+      <button (click)="onEdit()" class="action-button" app-button buttonType="neutral" title="Edit" ></button>
+      <button (click)="onDelete()" class="action-button" app-button buttonType="danger" title="Delete" ></button>
       <button class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
     </div>
   </div>
