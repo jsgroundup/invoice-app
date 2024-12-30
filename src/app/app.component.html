@@ -157,6 +157,7 @@ h2{
 <main *ngIf="detailsView">
 
   <invoice-card />
-  <app-form />
+  <app-form *ngIf="showForm" />
+  <app-dialog *ngIf="showDialog" />
 
 </main>

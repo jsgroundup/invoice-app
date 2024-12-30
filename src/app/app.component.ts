@@ -6,11 +6,13 @@ import { IconComponent } from './icon/icon.component';
 import { InvoiceCardComponent } from "./invoice-card/invoice-card.component";
 import { CommonModule } from '@angular/common';
 import { FormComponent } from './form/form.component';
+import { PopupOverlayComponent } from "./popup-overlay/popup-overlay.component";
+import { DialogComponent } from "./dialog/dialog.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, FormComponent, CommonModule],
+  imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, FormComponent, CommonModule, PopupOverlayComponent, DialogComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -18,4 +20,6 @@ export class AppComponent {
   title = 'invoice';
   isEmpty = !true;
   detailsView = true;
+  showForm = !false
+  showDialog = false
 }
