@@ -38,7 +38,9 @@
       --white-color: rgb(var(--white));
       --sidebar-color: rgb(55, 59, 83);
       --grey-bg: rgb(var(--light-grey));
-
+      --input-border-color: rgb(var(--light-grey));
+      --input-bg: transparent;
+      --form-bg: rgb(var(--white));
     }
 
     [data-theme="dark"]{
@@ -50,7 +52,9 @@
       --white-color: rgb(var(--secondary-color));
       --sidebar-color: rgb(var(--light-grey));
       --grey-bg: rgb(var(--dark-bg));
-
+      --input-border-color: transparent;
+      --input-bg: rgb(var(--secondary-color));
+      --form-bg: rgb(var(--dark-bg));
     }
 
     /* Font faces */
@@ -84,6 +88,8 @@
         transition-duration: .3s;
         transition-timing-function: ease-in;
         font-family: 'Spartan', sans-serif;
+        scrollbar-width:thin;
+
     }
 
     body{
@@ -92,7 +98,6 @@
       background-color: var(--page-bg);
       font-size: 15px;
     }
-
 
     /* Common styles */
     .text-lg{
