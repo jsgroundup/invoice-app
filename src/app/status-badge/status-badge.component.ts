@@ -11,7 +11,7 @@ export class StatusBadgeComponent {
   @HostBinding('class') get className() {
     return this.badge;
   }
-  @Input({ required: true }) badge!: 'paid' | 'pending' | 'draft';
+  @Input({ required: true }) badge!: Badges;
 }
 
-export type Badges = 'paid' | 'pending' | 'draft';
+export type Badges = 'paid' | 'pending' | 'draft' |{}&string;

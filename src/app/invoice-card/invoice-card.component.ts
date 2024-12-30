@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { StatusBadgeComponent } from '../status-badge/status-badge.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'invoice-card',
@@ -10,4 +11,10 @@ import { ButtonsComponent } from '../buttons/buttons.component';
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.css',
 })
-export class InvoiceCardComponent {}
+export class InvoiceCardComponent {
+  constructor(private route: Router){}
+
+  onClick(){
+    this.route.navigateByUrl('/')
+  }
+}

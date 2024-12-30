@@ -99,17 +99,17 @@ h2{
 
 <header app-header></header>
 
-<main *ngIf="!detailsView">
+<main *ngIf="viewAsHompage">
   <div class="content-head">
       <div>
         <h2 class="text-lg text-bold">Invoices</h2>
-        <div class="dark-grey text-sm">There are 4 pending invoices</div>
+        <div class="dark-grey text-sm">There are {{countPending$| async}} pending invoices</div>
 
       </div>
 
       <div class="flex-row">
           <button class="filter-button flex-row">
-            <span class="text-sm text-bold filter-text">Filter by status</span>
+            <span class="text-sm text-bold filter-text">Filter <span class="screen-large">by status</span></span>
             <span app-icon name='arrow-down'></span>
             <div class="filter-dropdown-menu">
                 <button class="checkmark selected">
@@ -129,7 +129,7 @@ h2{
 
           <button class="app-button flex-row">
             <span app-icon name="plus" class="plus-icon-container"></span>
-            <span class="button-text text-sm">New Invoice</span>
+            <span class="button-text text-sm">New <span class="screen-large button-text">Invoice</span></span>
           </button>
       </div>
   </div>
@@ -137,9 +137,9 @@ h2{
   @if (!isEmpty) {
     <ul>
 
-      <li invoice-listitem status="paid"></li>
-      <li invoice-listitem status="pending"></li>
-      <li invoice-listitem status="draft"></li>
+      @for (item of invoices$ | async; track item.id) {
+        <li invoice-listitem [invoiceData]="item"></li>
+      }
 
     </ul>
   }
@@ -154,7 +154,7 @@ h2{
 
 </main>
 
-<main *ngIf="detailsView">
+<main *ngIf="!viewAsHompage">
 
   <invoice-card />
   <app-form *ngIf="showForm" />
