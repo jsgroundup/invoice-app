@@ -19,7 +19,7 @@ form{
   border-bottom-right-radius: 20px;
   padding-left: 103px;
   overflow-y: auto;
-  animation: form-entry .2s ease-out .05s;
+  animation: form-entry .2s ease-out;
 }
 
 .form-content-container{
