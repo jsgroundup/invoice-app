@@ -7,8 +7,6 @@ import { PopupOverlayComponent } from '../popup-overlay/popup-overlay.component'
   standalone: true,
   imports: [ButtonsComponent, PopupOverlayComponent],
   templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.css'
+  styleUrl: './dialog.component.css',
 })
-export class DialogComponent {
-
-}
+export class DialogComponent {}

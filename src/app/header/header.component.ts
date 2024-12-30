@@ -10,24 +10,23 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  theme: ThemeMode = 'light'
+  theme: ThemeMode = 'light';
 
-  get isLightMode(){
+  get isLightMode() {
     return this.theme === 'light';
   }
 
-  toggleTheme(){
-    const theme: ThemeMode = this.theme = this.isLightMode ? 'dark' : 'light';
-    localStorage.setItem('theme',theme);
+  toggleTheme() {
+    const theme: ThemeMode = (this.theme = this.isLightMode ? 'dark' : 'light');
+    localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
   }
 
-  constructor(){
-    let theme = localStorage.getItem('theme') as ThemeMode|null;
-    if(theme&&['dark'].includes(theme)){
+  constructor() {
+    let theme = localStorage.getItem('theme') as ThemeMode | null;
+    if (theme && ['dark'].includes(theme)) {
       this.theme = theme;
       document.documentElement.setAttribute('data-theme', theme);
-
     }
   }
 }

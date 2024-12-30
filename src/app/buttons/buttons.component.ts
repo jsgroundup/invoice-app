@@ -11,7 +11,7 @@ export class ButtonsComponent {
   @Input() buttonType?: ButtonTypes;
   @Input({ required: true }) title = '';
 
-  @HostBinding('class') get className(): (ButtonTypes) {
+  @HostBinding('class') get className(): ButtonTypes {
     return ['neutral', 'danger', 'default'].includes(this.buttonType!)
       ? this.buttonType!
       : 'default';

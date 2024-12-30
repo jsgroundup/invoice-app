@@ -10,11 +10,11 @@ import { PopupOverlayComponent } from "./popup-overlay/popup-overlay.component";
 import { DialogComponent } from "./dialog/dialog.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, FormComponent, CommonModule, PopupOverlayComponent, DialogComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, FormComponent, CommonModule, DialogComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'invoice';

@@ -9,17 +9,16 @@ import { Component, input, OnDestroy, OnInit, output } from '@angular/core';
 })
 export class PopupOverlayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
-    document.body.style.overflow = "hidden"
+    document.body.style.overflow = 'hidden';
   }
 
   ngOnDestroy(): void {
-    document.body.style.overflow = ''
+    document.body.style.overflow = '';
   }
-
 
   close = output({ alias: 'onClose' });
 
   onClick() {
-    this.close.emit()
+    this.close.emit();
   }
 }

@@ -8,8 +8,6 @@ import { PopupOverlayComponent } from '../popup-overlay/popup-overlay.component'
   standalone: true,
   imports: [IconComponent, ButtonsComponent, PopupOverlayComponent],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css'
+  styleUrl: './form.component.css',
 })
-export class FormComponent {
-
-}
+export class FormComponent {}

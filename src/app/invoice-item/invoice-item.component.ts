@@ -7,8 +7,8 @@ import { Badges, StatusBadgeComponent } from '../status-badge/status-badge.compo
   standalone: true,
   imports: [IconComponent, StatusBadgeComponent],
   templateUrl: './invoice-item.component.html',
-  styleUrl: './invoice-item.component.css'
+  styleUrl: './invoice-item.component.css',
 })
 export class InvoiceItemComponent {
-  @Input({required: true}) status!: Badges
+  @Input({ required: true }) status!: Badges;
 }

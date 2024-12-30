@@ -8,8 +8,6 @@ import { ButtonsComponent } from '../buttons/buttons.component';
   standalone: true,
   imports: [IconComponent, StatusBadgeComponent, ButtonsComponent],
   templateUrl: './invoice-card.component.html',
-  styleUrl: './invoice-card.component.css'
+  styleUrl: './invoice-card.component.css',
 })
-export class InvoiceCardComponent {
-
-}
+export class InvoiceCardComponent {}
