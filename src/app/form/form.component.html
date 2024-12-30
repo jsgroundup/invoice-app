@@ -1,0 +1,117 @@
+<button aria-label="Close dialog" class="form-overlay"></button>
+
+<form>
+  <section class="form-content-container">
+    <h3 class="text-lg text-bold">New Invoices</h3>
+
+    <h4 class="form-head text-sm font-medium">Bill From</h4>
+    <label>
+      <div class="text-sm dark-grey form-text">Street Address</div>
+      <input type="text" />
+    </label>
+    <div class="flex-row">
+      <label>
+        <div class="text-sm dark-grey form-text">City</div>
+        <input type="text" />
+      </label>
+
+      <label class="gap-around">
+        <div class="text-sm dark-grey form-text">Post Code</div>
+        <input type="text" />
+      </label>
+
+      <label>
+        <div class="text-sm dark-grey form-text">Country</div>
+        <input type="text" />
+      </label>
+    </div>
+
+    <h4 class="form-head text-sm font-medium">Bill To</h4>
+    <label>
+      <div class="text-sm dark-grey form-text">Client's Name</div>
+      <input type="text" />
+    </label>
+
+    <label>
+      <div class="text-sm dark-grey form-text">Client's Email</div>
+      <input type="email" />
+    </label>
+
+    <label>
+      <div class="text-sm dark-grey form-text">Street Address</div>
+      <input type="text" />
+    </label>
+
+    <div class="flex-row">
+      <label>
+        <div class="text-sm dark-grey form-text">City</div>
+        <input type="text" />
+      </label>
+
+      <label class="gap-around">
+        <div class="text-sm dark-grey form-text">Post Code</div>
+        <input type="text" />
+      </label>
+
+      <label>
+        <div class="text-sm dark-grey form-text">Country</div>
+        <input type="text" />
+      </label>
+    </div>
+
+    <div class="flex-row form-set">
+      <label>
+        <div class="text-sm dark-grey form-text">Invoice Date</div>
+        <input type="date" />
+      </label>
+
+      <!-- <div class="gap-around"></div> -->
+
+      <label>
+        <div class="text-sm dark-grey form-text">Payment Terms</div>
+        <input type="text" />
+      </label>
+    </div>
+
+    <h4 class="font-medium dark-grey" style="margin-bottom: 15px;">Bill To</h4>
+    <div class="parent">
+      <div class="div5 text-sm dark-grey form-text">Item Name</div>
+      <div class="div6 text-sm dark-grey form-text">Qty</div>
+      <div class="div7 text-sm dark-grey form-text">Price</div>
+      <div class="div8 text-sm dark-grey form-text">Total</div>
+      <div class="div9 text-sm dark-grey form-text"></div>
+    </div>
+
+    <div class="parent">
+      <div class="div5 text-sm dark-grey">
+        <label>
+          <input type="text" class="text-sm" title="Name" />
+        </label>
+      </div>
+      <div class="div6 text-sm dark-grey">
+        <label>
+          <input title="Quantity" type="text" class="text-sm" />
+        </label>
+      </div>
+      <div class="div7 text-sm dark-grey">
+        <label>
+          <input title="Price" type="text" class="text-sm" />
+        </label>
+      </div>
+      <div class="div8 text-sm dark-grey">
+        <label>
+          <input title="Total" type="text" class="text-sm" />
+        </label>
+      </div>
+      <button aria-label="delete" class="div9 delete-button" app-icon name="delete"></button>
+    </div>
+
+    <div class="flex-row new-item-button-container">
+      <button class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
+    </div>
+
+    <div>
+
+    </div>
+  </section>
+</form>
