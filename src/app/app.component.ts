@@ -5,11 +5,12 @@ import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { IconComponent } from './icon/icon.component';
 import { InvoiceCardComponent } from "./invoice-card/invoice-card.component";
 import { CommonModule } from '@angular/common';
+import { FormComponent } from './form/form.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, CommonModule],
+  imports: [HeaderComponent, InvoiceItemComponent, IconComponent, InvoiceCardComponent, FormComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
