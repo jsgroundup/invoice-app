@@ -9,7 +9,7 @@
 :host.default{
   background-color: rgb(var(--primary-color));
 }
-:host.default:hover {
+:host.default:hover,:host.default:disabled {
   background-color: rgb(var(--light-primary-color));
 }
 

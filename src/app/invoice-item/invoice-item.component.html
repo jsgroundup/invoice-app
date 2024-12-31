@@ -1,4 +1,4 @@
-<button (click)="onItemOnClick()" class="flex-row screen-large">
+<a [routerLink]="['/invoice', invoiceData.id]" class="flex-row screen-large">
   <div class="details flex-row">
     <div>
       <span class="text-bold text-sm column">
@@ -15,9 +15,9 @@
     <status-badge [badge]="invoiceData.status" />
     <div app-icon name="arrow-right"></div>
   </div>
-</button>
+</a>
 
-<button class="screen-small">
+<a [routerLink]="['/invoice', invoiceData.id]" class="screen-small">
   <div class="flex-row" style="margin-bottom: 15px;">
     <span class="text-bold column">
       <span class="dark-grey">#</span> <span>RT3080</span>
@@ -32,4 +32,4 @@
     </div>
     <status-badge [badge]="invoiceData.status" />
   </div>
-</button>
+</a>

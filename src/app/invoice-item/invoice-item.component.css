@@ -11,7 +11,7 @@
   border: 1.5px solid rgb(var(--primary-color));
  }
 
- button {
+ a {
    padding: 10px 20px;
    display: block;
    border: none;
@@ -19,6 +19,7 @@
    text-align: start;
    background-color: transparent;
    cursor: pointer;
+   text-decoration: none;
  }
 
  .column {

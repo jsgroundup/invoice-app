@@ -9,12 +9,14 @@ import { AppStore } from '../../store';
 import { Observable } from 'rxjs';
 import { Invoice } from '../../data/data';
 import { selectAllInvoices, selectInvoice } from '../../store/selectors/invoice';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { createAction, props } from '@ngrx/store';
+import Actions from '../../store/actions/invoices';
 
 @Component({
   selector: 'invoice-card',
   standalone: true,
-  imports: [AsyncPipe, IconComponent, StatusBadgeComponent, ButtonsComponent],
+  imports: [CommonModule, AsyncPipe, IconComponent, StatusBadgeComponent, ButtonsComponent],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.css',
 })
@@ -57,4 +59,10 @@ export class InvoiceCardComponent {
     this.globalService.editing = false;
     this.globalService.deleting = true;
   }
+
+  markAsPaid(id: string) {
+    this.store.dispatch(Actions.updateStatus({ id: id, status: 'paid' }));
+  }
 }
+
+

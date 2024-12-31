@@ -6,6 +6,6 @@
   </p>
   <div class="dialog-actions">
      <button (click)="onExit()" app-button buttonType="neutral" title="Cancel">Cancel</button>
-     <button app-button buttonType="danger" title="Delete" class="gap-around">Delete</button>
+     <button (click)="confirmDelete(activeInvoiceId)" app-button buttonType="danger" title="Delete" class="gap-around">Delete</button>
   </div>
 </dialog>

@@ -4,18 +4,18 @@
   <span class="text-sm text-bold back-button-text">Go back</span>
 </button>
 
-<div class="card-container">
+<div class="card-container" *ngIf="invoiceData | async as invoiceData">
 
   <div class="action-bar flex-row">
     <div class="flex-row status">
       <span class="text-sm dark-grey action-bar-text">Status</span>
-      <status-badge [badge]="(invoiceData|async)?.status||'draft'" />
+      <status-badge [badge]="invoiceData.status||'draft'" />
     </div>
 
     <div class="flex-row actions">
       <button (click)="onEdit()" class="action-button" app-button buttonType="neutral" title="Edit" ></button>
       <button (click)="onDelete()" class="action-button" app-button buttonType="danger" title="Delete" ></button>
-      <button class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
+      <button (click)="markAsPaid(invoiceData.id)" [disabled]="invoiceData.status==='draft'" class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
     </div>
   </div>
 
@@ -23,15 +23,15 @@
     <div class="flex-row details-top-details">
       <div>
           <div class="text-bold details-text column" style="margin-bottom: 8px;">
-            <span class="dark-grey">#</span> <span>{{(invoiceData|async)?.id}}</span>
+            <span class="dark-grey">#</span> <span>{{invoiceData.id}}</span>
           </div>
-          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.description}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.description}}</div>
       </div>
       <div>
-        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.street}}</div>
-        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.city}}</div>
-        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.postCode}}</div>
-        <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.senderAddress?.country}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.street}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.city}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.postCode}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.country}}</div>
       </div>
     </div>
 
@@ -39,25 +39,25 @@
         <div class="column">
           <div>
             <div class="details-text dark-grey text-sm">Invoice Date</div>
-            <div class="details-text text-md text-bold">{{formatDate((invoiceData|async)?.createdAt)}}</div>
+            <div class="details-text text-md text-bold">{{formatDate(invoiceData.createdAt)}}</div>
           </div>
           <div style="margin-top: 30px;">
             <div class="details-text dark-grey text-sm">Payment Due</div>
-            <div class="details-text text-md text-bold">{{formatDate((invoiceData|async)?.paymentDue)}}</div>
+            <div class="details-text text-md text-bold">{{formatDate(invoiceData.paymentDue)}}</div>
           </div>
         </div>
         <div class="column">
           <div class="details-text dark-grey text-sm">Bill To</div>
-          <div class="details-text text-md text-bold">{{(invoiceData|async)?.clientName}}</div>
-          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.street}}</div>
-          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.city}}</div>
-          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.postCode}}</div>
-          <div class="details-text dark-grey text-sm">{{(invoiceData|async)?.clientAddress?.country}}</div>
+          <div class="details-text text-md text-bold">{{invoiceData.clientName}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.street}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.city}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.postCode}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.country}}</div>
         </div>
         <div class="column">
           <div>
             <div class="details-text dark-grey text-sm">Sent To</div>
-            <div class="details-text text-md text-bold">{{(invoiceData|async)?.clientEmail}}</div>
+            <div class="details-text text-md text-bold">{{invoiceData.clientEmail}}</div>
           </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
         <!-- </div> -->
       </div>
 
-      @for (item of (invoiceData|async)?.items; track item.name) {
+      @for (item of invoiceData.items; track item.name) {
         <div class="grid-item-container price-details-item">
           <div class="grid-item-1">
             <div class="font-medium details-text">{{item.name}}</div>

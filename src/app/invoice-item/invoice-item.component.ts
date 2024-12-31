@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { Badges, StatusBadgeComponent } from '../status-badge/status-badge.component';
 import { Invoice } from '../../data/data';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: '[invoice-listitem]',
   standalone: true,
-  imports: [IconComponent, StatusBadgeComponent],
+  imports: [RouterModule, IconComponent, StatusBadgeComponent],
   templateUrl: './invoice-item.component.html',
   styleUrl: './invoice-item.component.css',
 })

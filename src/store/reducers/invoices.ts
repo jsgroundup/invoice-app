@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import Invoices from "../../data/data";
+import Invoices, { Invoice } from "../../data/data";
 import Actions from '../actions/invoices'
 
 export const invoiceReducer = createReducer(
@@ -9,5 +9,12 @@ export const invoiceReducer = createReducer(
   }),
   on(Actions.add, (store, data) => {
     return [data, ...store];
-  })
+  }),
+  on(Actions.updateStatus, (store, { id, status }) => {
+    const index = store.findIndex((data) => data.id === id);
+    if(index >=0) {
+      return [...store.slice(0, index), { ...store[index], status }, ...store.slice(index + 1)] as Invoice[];
+    }
+    return store;
+  }),
 );
