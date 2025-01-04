@@ -55,7 +55,6 @@ export class AppComponent implements OnInit{
       )
     );
 
-
   }
 
   ngOnInit(): void {
@@ -71,6 +70,12 @@ export class AppComponent implements OnInit{
         0
       )
     );
+  }
+
+  onNewInvoice(){
+    this.globalService.adding = true;
+    this.globalService.editing = false;
+    this.globalService.deleting = false;
   }
 }
 

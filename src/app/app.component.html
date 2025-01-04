@@ -29,7 +29,7 @@
             </div>
           </button>
 
-          <button class="app-button flex-row">
+          <button (click)="onNewInvoice()" class="app-button flex-row">
             <span app-icon name="plus" class="plus-icon-container"></span>
             <span class="button-text text-sm">New <span class="screen-large button-text">Invoice</span></span>
           </button>
@@ -54,6 +54,8 @@
     </div>
   }
 
+
+   <app-form *ngIf="globalService.adding" />
 </main>
 
 <main *ngIf="!viewAsHompage">
