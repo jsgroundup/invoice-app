@@ -57,13 +57,14 @@ input{
   outline: none;
 }
 
+input.error {
+  border: 1.5px solid rgb(var(--error-color));
+}
+
 input:focus{
   border: 1.5px solid rgb(var(--primary-color));
 }
 
-input.error, input.error:focus{
-  border: 1.5px solid rgb(var(--error-color));
-}
 
 input.text-sm{
   font-size: 13px;
@@ -111,6 +112,14 @@ input.text-sm{
   background-color: transparent;
   cursor: pointer;
   margin-top: -20px;
+}
+
+.delete-button path{
+  color: #888EB0;
+}
+
+.delete-button:hover path{
+  color: rgb(var(--error-color));
 }
 
 .new-item-button-container{

@@ -1,74 +1,74 @@
 <app-popup-overlay (onClose)="onExit()" />
-<form>
+<form id="form" [formGroup]="formState">
   <section class="form-content-container">
-    <h3 class="text-lg text-bold">New Invoices</h3>
+    <h3 class="text-lg text-bold">{{globalService.editing?'Edit Invoice':'New Invoices'}}</h3>
 
     <h4 class="form-head text-sm font-medium">Bill From</h4>
     <label>
       <div class="text-sm dark-grey form-text">Street Address</div>
-      <input type="text" />
+      <input (keyup)="onEnterKeyPressed($event)" [className]="controllErrored('senderStreet')&&'error'" name="street_address" type="text" formControlName="senderStreet" />
     </label>
     <div class="flex-row">
       <label>
         <div class="text-sm dark-grey form-text">City</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderCity')&&'error'" formControlName="senderCity"/>
       </label>
 
       <label class="gap-around">
         <div class="text-sm dark-grey form-text">Post Code</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderPostCode')&&'error'" formControlName="senderPostCode"/>
       </label>
 
       <label>
         <div class="text-sm dark-grey form-text">Country</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderCountry')&&'error'" formControlName="senderCountry"/>
       </label>
     </div>
 
     <h4 class="form-head text-sm font-medium">Bill To</h4>
     <label>
       <div class="text-sm dark-grey form-text">Client's Name</div>
-      <input type="text" />
+      <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientName')&&'error'" formControlName="clientName"/>
     </label>
 
     <label>
       <div class="text-sm dark-grey form-text">Client's Email</div>
-      <input type="email" />
+      <input (keyup)="onEnterKeyPressed($event)" type="email" [className]="controllErrored('clientEmail')&&'error'" formControlName="clientEmail"/>
     </label>
 
     <label>
       <div class="text-sm dark-grey form-text">Street Address</div>
-      <input type="text" />
+      <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientStreet')&&'error'" formControlName="clientStreet"/>
     </label>
 
     <div class="flex-row">
       <label>
         <div class="text-sm dark-grey form-text">City</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientCity')&&'error'" formControlName="clientCity"/>
       </label>
 
       <label class="gap-around">
         <div class="text-sm dark-grey form-text">Post Code</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientPostCode')&&'error'" formControlName="clientPostCode"/>
       </label>
 
       <label>
         <div class="text-sm dark-grey form-text">Country</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientCountry')&&'error'" formControlName="clientCountry"/>
       </label>
     </div>
 
     <div class="flex-row form-set">
       <label>
         <div class="text-sm dark-grey form-text">Invoice Date</div>
-        <input type="date" />
+        <input (keyup)="onEnterKeyPressed($event)" type="date" [className]="controllErrored('invoiceDate')&&'error'" formControlName="invoiceDate"/>
       </label>
 
       <!-- <div class="gap-around"></div> -->
 
       <label>
         <div class="text-sm dark-grey form-text">Payment Terms</div>
-        <input type="text" />
+        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('paymentTerms')&&'error'" formControlName="paymentTerms"/>
       </label>
     </div>
 
@@ -81,32 +81,34 @@
       <div class="div9 text-sm dark-grey form-text"></div>
     </div>
 
-    <div class="parent">
-      <div class="div5 text-sm dark-grey">
-        <label>
-          <input type="text" class="text-sm" title="Name" />
-        </label>
+    @for (item of newItems; track item.id) {
+      <div class="parent">
+        <div class="div5 text-sm dark-grey">
+          <label>
+            <input [value]="item.name" (keyup)="onEnterKeyPressed($event)" type="text" class="text-sm" title="Name" />
+          </label>
+        </div>
+        <div class="div6 text-sm dark-grey">
+          <label>
+            <input [value]="item.quantity" (keyup)="onEnterKeyPressed($event)" title="Quantity" type="text" class="text-sm" />
+          </label>
+        </div>
+        <div class="div7 text-sm dark-grey">
+          <label>
+            <input value="£ {{item.price}}" (keyup)="onEnterKeyPressed($event)" title="Price" type="text" class="text-sm" />
+          </label>
+        </div>
+        <div class="div8 text-sm dark-grey">
+          <label>
+            <input disabled value="£ {{(item.price * item.quantity).toFixed(2)}}" (keyup)="onEnterKeyPressed($event)" title="Total" type="text" class="text-sm" />
+          </label>
+        </div>
+        <button title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
       </div>
-      <div class="div6 text-sm dark-grey">
-        <label>
-          <input title="Quantity" type="text" class="text-sm" />
-        </label>
-      </div>
-      <div class="div7 text-sm dark-grey">
-        <label>
-          <input title="Price" type="text" class="text-sm" />
-        </label>
-      </div>
-      <div class="div8 text-sm dark-grey">
-        <label>
-          <input title="Total" type="text" class="text-sm" />
-        </label>
-      </div>
-      <button aria-label="delete" class="div9 delete-button" app-icon name="delete"></button>
-    </div>
+    }
 
     <div class="flex-row new-item-button-container">
-      <button class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
+      <button (click)="onAddNewItem($event)" class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
     </div>
 
     <div class="actions flex-row">
