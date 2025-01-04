@@ -7,6 +7,7 @@ export class GlobalService {
 
   constructor() { }
 
+  adding = false
   editing = false;
   deleting = false;
 }
