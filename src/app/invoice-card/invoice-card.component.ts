@@ -8,9 +8,8 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '../../store';
 import { Observable } from 'rxjs';
 import { Invoice } from '../../data/data';
-import { selectAllInvoices, selectInvoice } from '../../store/selectors/invoice';
+import { selectInvoice } from '../../store/selectors/invoice';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { createAction, props } from '@ngrx/store';
 import Actions from '../../store/actions/invoices';
 
 @Component({
@@ -53,10 +52,12 @@ export class InvoiceCardComponent {
   onEdit() {
     this.globalService.editing = true;
     this.globalService.deleting = false;
+    this.globalService.adding = false;
   }
 
   onDelete() {
     this.globalService.editing = false;
+    this.globalService.adding = false;
     this.globalService.deleting = true;
   }
 
