@@ -41,7 +41,9 @@ export class FormComponent {
     // Populate form fields with invoice data if form is in editting mode
     this.globalService.editing&&
     this.route.params.subscribe(({ id }) => {
+
       this.invoice = store.select(selectInvoice({ id }));
+
       this.invoice.subscribe((data) => {
         this.newItems = data.items.map((item) => ({
           ...item,

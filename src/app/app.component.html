@@ -10,24 +10,7 @@
       </div>
 
       <div class="flex-row">
-          <button class="filter-button flex-row">
-            <span class="text-sm text-bold filter-text">Filter <span class="screen-large">by status</span></span>
-            <span app-icon name='arrow-down'></span>
-            <div class="filter-dropdown-menu">
-                <button class="checkmark selected">
-                  <span class="checkmark-icon" app-icon name="check" ></span>
-                  <span class="checkmark-text text-sm font-medium">Draft</span>
-                </button>
-                <button class="checkmark">
-                  <span class="checkmark-icon"></span>
-                  <span class="checkmark-text text-sm font-medium">Pending</span>
-                </button>
-                <button class="checkmark">
-                  <span class="checkmark-icon"></span>
-                  <span class="checkmark-text text-sm font-medium">Paid</span>
-                </button>
-            </div>
-          </button>
+        <button app-filter class="flex-row">Filter</button>
 
           <button (click)="onNewInvoice()" class="app-button flex-row">
             <span app-icon name="plus" class="plus-icon-container"></span>

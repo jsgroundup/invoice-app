@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { AppStore } from '../store';
 import { selectAllInvoices } from '../store/selectors/invoice';
 import { GlobalService } from './services/global.service';
+import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { GlobalService } from './services/global.service';
     InvoiceCardComponent,
     FormComponent,
     DialogComponent,
+    FilterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
