@@ -1,0 +1,17 @@
+
+<span class="text-sm text-bold filter-text">Filter <span class="screen-large">by status</span></span>
+<span app-icon name='arrow-down'></span>
+<div *ngIf="expanded" class="filter-dropdown-menu">
+    <button [attr.aria-checked]="checked==='draft'" role="checkbox" (click)="onSelectStatus('draft')" class="checkmark {{checked==='draft'?'selected':''}}">
+      <span class="checkmark-icon" app-icon [name]="checked==='draft'?'check':''"></span>
+      <span class="checkmark-text text-sm font-medium">Draft</span>
+    </button>
+    <button [attr.aria-checked]="checked==='pending'" role="checkbox" (click)="onSelectStatus('pending')" class="checkmark {{checked==='pending'?'selected':''}}">
+      <span class="checkmark-icon" app-icon [name]="checked==='pending'?'check':''"></span>
+      <span class="checkmark-text text-sm font-medium">Pending</span>
+    </button>
+    <button [attr.aria-checked]="checked==='paid'" role="checkbox" (click)="onSelectStatus('paid')" class="checkmark {{checked==='paid'?'selected':''}}">
+      <span class="checkmark-icon" app-icon [name]="checked==='paid'?'check':''"></span>
+      <span class="checkmark-text text-sm font-medium">Paid</span>
+    </button>
+</div>

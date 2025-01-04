@@ -1,0 +1,92 @@
+:host {
+  background-color: transparent;
+  border: none;
+  margin-right: 30px;
+  cursor: pointer;
+  padding: 8px 10px;
+  position: relative;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-text {
+  margin-right: 8px;
+}
+
+.plus-icon-container {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(var(--white));
+  border-radius: 50%;
+  padding-left: 1px;
+}
+
+.filter-dropdown-menu {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: var(--white-color);
+  width: 140px;
+  height: 100px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-left: -10px;
+  border: 1px solid var(--neutral-color);
+  box-shadow: 0px 12px 18px -1px rgba(var(--side-bar), 0.2);
+  cursor: auto;
+}
+
+:host:hover .filter-dropdown-menu {
+  /* box-shadow: 0px 12px 18px -1px rgba(var(--side-bar), 0.2); */
+}
+
+.checkmark {
+  border: none;
+  cursor: pointer;
+  padding: 5px 2px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  width: 100%;
+}
+
+.checkmark-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background-color: var(--grey-bg);
+  margin-right: 8px;
+  border: 1.5px solid transparent;
+}
+
+.checkmark:hover .checkmark-icon {
+  border: 1.5px solid rgb(var(--primary-color));
+}
+
+.checkmark.selected .checkmark-icon {
+  background-color: rgb(var(--primary-color));
+}
+
+
+.screen-large {
+  display: inline;
+}
+
+.screen-small {
+  display: none;
+}
+
+ @media screen and (max-width: 510px) {
+   .screen-large {
+     display: none;
+   }
+
+   .screen-small {
+     display: inline;
+   }
+ }
