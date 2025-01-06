@@ -64,8 +64,6 @@
         <input (keyup)="onEnterKeyPressed($event)" type="date" [className]="controllErrored('invoiceDate')&&'error'" formControlName="invoiceDate"/>
       </label>
 
-      <!-- <div class="gap-around"></div> -->
-
       <label>
         <div class="text-sm dark-grey form-text">Payment Terms</div>
         <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('paymentTerms')&&'error'" formControlName="paymentTerms"/>
@@ -103,21 +101,21 @@
             <input disabled value="£ {{(item.price * item.quantity).toFixed(2)}}" (keyup)="onEnterKeyPressed($event)" title="Total" type="text" class="text-sm" />
           </label>
         </div>
-        <button title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
+        <button type="button" title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
       </div>
     }
 
     <div class="flex-row new-item-button-container">
-      <button (click)="onAddNewItem($event)" class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
+      <button type="button" (click)="onAddNewItem($event)" class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
     </div>
 
     <div class="actions flex-row">
       <div>
-        <button app-button buttonType="neutral" title="Discard">Discard</button>
+        <button type="button" app-button buttonType="neutral" title="Discard">Discard</button>
       </div>
       <div>
-        <button app-button buttonType="neutral" title="Save as Draft" style="margin-right: 10px;">Save as Draft</button>
-        <button app-button buttonType="default" title="Save & Send">Save & Send</button>
+        <button type="button" app-button buttonType="neutral" title="Save as Draft" style="margin-right: 10px;">Save as Draft</button>
+        <button type="button" app-button buttonType="default" title="Save & Send">Save & Send</button>
       </div>
     </div>
   </section>
