@@ -10,7 +10,7 @@
       </div>
 
       <div class="flex-row">
-        <button app-filter class="flex-row">Filter</button>
+        <button app-filter (onFilter)="onFilter($event)" class="flex-row">Filter</button>
 
           <button (click)="onNewInvoice()" class="app-button flex-row">
             <span app-icon name="plus" class="plus-icon-container"></span>
@@ -19,10 +19,10 @@
       </div>
   </div>
 
-  @if ((invoices$ | async)!.length>0) {
+  @if (filteredInvoices.length>0) {
     <ul>
 
-      @for (item of invoices$|async; track item.id) {
+      @for (item of filteredInvoices; track item.id) {
         <li invoice-listitem [invoiceData]="item"></li>
       }
 

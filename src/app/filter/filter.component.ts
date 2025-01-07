@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, output } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { CommonModule } from '@angular/common';
 import { Badges } from '../status-badge/status-badge.component';
@@ -18,8 +18,11 @@ export class FilterComponent {
     this.expanded = !this.expanded;
   }
 
+  onFilter = output<typeof this.checked>()
+
   onSelectStatus(status: Badges){
     this.checked = this.checked === status? '' : status;
     this.expanded = false;
+    this.onFilter.emit(this.checked)
   }
 }

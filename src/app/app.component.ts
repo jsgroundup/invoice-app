@@ -14,6 +14,7 @@ import { AppStore } from '../store';
 import { selectAllInvoices } from '../store/selectors/invoice';
 import { GlobalService } from './services/global.service';
 import { FilterComponent } from './filter/filter.component';
+import { Badges } from './status-badge/status-badge.component';
 
 @Component({
   selector: 'app-root',
@@ -27,26 +28,33 @@ import { FilterComponent } from './filter/filter.component';
     InvoiceCardComponent,
     FormComponent,
     DialogComponent,
-    FilterComponent
+    FilterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'invoice';
   isEmpty = !true;
   detailsView = !true;
   showForm = false;
   showDialog = false;
+  filters: Badges | '' = '';
 
   invoices$: Observable<Invoice[]>;
   countPending$: Observable<number>;
-  viewAsHompage: boolean = true
+  filteredInvoices: Invoice[] = [];
+  viewAsHompage: boolean = true;
 
-
-  constructor(private store: Store<AppStore>, private route: ActivatedRoute, public globalService: GlobalService) {
-
+  constructor(
+    private store: Store<AppStore>,
+    private route: ActivatedRoute,
+    public globalService: GlobalService
+  ) {
     this.invoices$ = this.store.select(selectAllInvoices);
+    this.invoices$.subscribe((data)=>{
+      this.filterItems(data)
+    })
 
     this.countPending$ = this.invoices$.pipe(
       map((invoices: Invoice[]) =>
@@ -56,7 +64,6 @@ export class AppComponent implements OnInit{
         )
       )
     );
-
   }
 
   ngOnInit(): void {
@@ -74,7 +81,20 @@ export class AppComponent implements OnInit{
     );
   }
 
-  onNewInvoice(){
+  filterItems(items: Invoice[]) {
+    this.filteredInvoices = this.filters.length<1? items:items.filter(
+      (item) => item.status === this.filters
+    );
+  }
+
+  onFilter(status: typeof this.filters){
+    this.filters = status;
+    this.invoices$.subscribe((data) => {
+      this.filterItems(data);
+    });
+  }
+
+  onNewInvoice() {
     this.globalService.adding = true;
     this.globalService.editing = false;
     this.globalService.deleting = false;
