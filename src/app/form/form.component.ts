@@ -11,6 +11,9 @@ import { selectInvoice } from '../../store/selectors/invoice';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { InputsComponent } from '../inputs/inputs.component';
+import { createForm } from './forms';
+import Actions from '../../store/actions/invoices';
 
 @Component({
   selector: 'app-form',
@@ -21,6 +24,7 @@ import { CommonModule } from '@angular/common';
     IconComponent,
     ButtonsComponent,
     PopupOverlayComponent,
+    InputsComponent
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
@@ -29,6 +33,7 @@ export class FormComponent {
   formState!: FormGroup<{[k in keyof FormFields]: FormControl<string|null>}>;
   invoice!: Observable<Invoice>;
   newItems: (Invoice['items'][number] & { id: string })[] = [];
+  editingInvoiceId: string = '';
 
   constructor(
     public globalService: GlobalService,
@@ -41,14 +46,20 @@ export class FormComponent {
     // Populate form fields with invoice data if form is in editting mode
     this.globalService.editing&&
     this.route.params.subscribe(({ id }) => {
+      // Set the editing invoice id
+      this.editingInvoiceId = id;
 
+      // Get the invoice from the store
       this.invoice = store.select(selectInvoice({ id }));
 
+      // Subscribe to the invoice observable
       this.invoice.subscribe((data) => {
         this.newItems = data.items.map((item) => ({
           ...item,
           id: `${Math.random()}`,
         }));
+
+        // Set the form fields with the invoice data
         this.setFormFieldValues({
           senderStreet: data.senderAddress.street,
           senderCity: data.senderAddress.city,
@@ -65,6 +76,7 @@ export class FormComponent {
           invoiceDate: data.createdAt,
           paymentTerms: '',
         });
+
       });
     });
   }
@@ -86,75 +98,60 @@ export class FormComponent {
   }
 
   createFormGroup(){
-    this.formState = new FormGroup({
-      senderStreet: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      senderCity: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      senderCountry: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      senderPostCode: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-        Validators.pattern(/[a-zA-Z0-9]/),
-      ]),
+    this.formState = createForm()
+  }
 
-      clientName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      clientEmail: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(5),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      clientStreet: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      clientCity: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      clientCountry: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.pattern(/[^\s+]/),
-      ]),
-      clientPostCode: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-        Validators.pattern(/[a-zA-Z0-9]/),
-      ]),
-
-      invoiceDate: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-      ]),
-      paymentTerms: new FormControl('', [
-        Validators.required,
-        Validators.minLength(0),
-      ]),
-    });
+  getFormControl(controlName: keyof FormFields) {
+    return this.formState.get(controlName) as FormControl<string | null>;
   }
 
   onExit() {
     this.globalService.editing = false;
     this.globalService.adding = false;
     this.globalService.deleting = false;
+  }
+
+  onSave(saveAs: 'new' | 'update') {
+    // Early return if form is invalid
+    if (this.formState.invalid) {
+      return;
+    }
+
+    const formValues = this.formState.value as Required<{[K in keyof typeof this.formState.value]: string}>;
+    const invoice: Invoice = {
+      id: this.editingInvoiceId || this.globalService.generateId(),
+      senderAddress: {
+        street: formValues.senderStreet,
+        city: formValues.senderCity,
+        postCode: formValues.senderPostCode,
+        country: formValues.senderCountry,
+      },
+      clientEmail: formValues.clientEmail,
+      clientName: formValues.clientName,
+      clientAddress: {
+        street: formValues.clientStreet,
+        city: formValues.clientCity,
+        postCode: formValues.clientPostCode,
+        country: formValues.clientCountry,
+      },
+      createdAt: formValues.invoiceDate,
+      paymentDue: formValues.paymentTerms,
+      status: 'pending',
+      total: this.newItems.reduce((acc, item) => acc + item.total, 0),
+      items: this.newItems.map((item) => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: item.price,
+        total: item.total,
+      })),
+      description: '',
+      paymentTerms: 89,
+    };
+
+    // Dispatch the add invoice action
+    this.store.dispatch(saveAs === 'new' ? Actions.add(invoice) : Actions.update(invoice));
+
+    this.globalService.resetForm();
   }
 
   onAddNewItem(e:MouseEvent) {
@@ -208,7 +205,7 @@ const FormFieldKeys: (keyof FormFields)[] = [
   'paymentTerms',
 ]
 
-interface FormFields{
+export interface FormFields{
   senderStreet: string;
   senderCity: string;
   senderPostCode: string;

@@ -41,34 +41,6 @@ form{
   margin-bottom: 20px;
 }
 
-label{
-  margin-bottom: 20px;
-  display: block;
-}
-
-input{
-  border: 1.5px solid var(--input-border-color);
-  border-radius: 5px;
-  padding: 10px;
-  background-color: var(--input-bg);
-  font-weight: 500;
-  font-size: 15px;
-  width: 100%;
-  outline: none;
-}
-
-input.error {
-  border: 1.5px solid rgb(var(--error-color));
-}
-
-input:focus{
-  border: 1.5px solid rgb(var(--primary-color));
-}
-
-
-input.text-sm{
-  font-size: 13px;
-}
 
 .gap-around{
   margin-left: 20px;

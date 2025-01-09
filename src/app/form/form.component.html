@@ -3,107 +3,56 @@
   <section class="form-content-container">
     <h3 class="text-lg text-bold">{{globalService.editing?'Edit Invoice':'New Invoices'}}</h3>
 
-    <h4 class="form-head text-sm font-medium">Bill From</h4>
-    <label>
-      <div class="text-sm dark-grey form-text">Street Address</div>
-      <input (keyup)="onEnterKeyPressed($event)" [className]="controllErrored('senderStreet')&&'error'" name="street_address" type="text" formControlName="senderStreet" />
-    </label>
-    <div class="flex-row">
-      <label>
-        <div class="text-sm dark-grey form-text">City</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderCity')&&'error'" formControlName="senderCity"/>
-      </label>
+    <section>
+      <h4 class="form-head text-sm font-medium">Bill From</h4>
+      <app-input [formControl]="getFormControl('senderStreet')" inputTitle="Street Address" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderStreet')" controlName="senderStreet" />
 
-      <label class="gap-around">
-        <div class="text-sm dark-grey form-text">Post Code</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderPostCode')&&'error'" formControlName="senderPostCode"/>
-      </label>
-
-      <label>
-        <div class="text-sm dark-grey form-text">Country</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('senderCountry')&&'error'" formControlName="senderCountry"/>
-      </label>
-    </div>
-
-    <h4 class="form-head text-sm font-medium">Bill To</h4>
-    <label>
-      <div class="text-sm dark-grey form-text">Client's Name</div>
-      <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientName')&&'error'" formControlName="clientName"/>
-    </label>
-
-    <label>
-      <div class="text-sm dark-grey form-text">Client's Email</div>
-      <input (keyup)="onEnterKeyPressed($event)" type="email" [className]="controllErrored('clientEmail')&&'error'" formControlName="clientEmail"/>
-    </label>
-
-    <label>
-      <div class="text-sm dark-grey form-text">Street Address</div>
-      <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientStreet')&&'error'" formControlName="clientStreet"/>
-    </label>
-
-    <div class="flex-row">
-      <label>
-        <div class="text-sm dark-grey form-text">City</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientCity')&&'error'" formControlName="clientCity"/>
-      </label>
-
-      <label class="gap-around">
-        <div class="text-sm dark-grey form-text">Post Code</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientPostCode')&&'error'" formControlName="clientPostCode"/>
-      </label>
-
-      <label>
-        <div class="text-sm dark-grey form-text">Country</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('clientCountry')&&'error'" formControlName="clientCountry"/>
-      </label>
-    </div>
-
-    <div class="flex-row form-set">
-      <label>
-        <div class="text-sm dark-grey form-text">Invoice Date</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="date" [className]="controllErrored('invoiceDate')&&'error'" formControlName="invoiceDate"/>
-      </label>
-
-      <label>
-        <div class="text-sm dark-grey form-text">Payment Terms</div>
-        <input (keyup)="onEnterKeyPressed($event)" type="text" [className]="controllErrored('paymentTerms')&&'error'" formControlName="paymentTerms"/>
-      </label>
-    </div>
-
-    <h4 class="font-medium dark-grey" style="margin-bottom: 15px;">Bill To</h4>
-    <div class="parent">
-      <div class="div5 text-sm dark-grey form-text">Item Name</div>
-      <div class="div6 text-sm dark-grey form-text">Qty</div>
-      <div class="div7 text-sm dark-grey form-text">Price</div>
-      <div class="div8 text-sm dark-grey form-text">Total</div>
-      <div class="div9 text-sm dark-grey form-text"></div>
-    </div>
-
-    @for (item of newItems; track item.id) {
-      <div class="parent">
-        <div class="div5 text-sm dark-grey">
-          <label>
-            <input [value]="item.name" (keyup)="onEnterKeyPressed($event)" type="text" class="text-sm" title="Name" />
-          </label>
-        </div>
-        <div class="div6 text-sm dark-grey">
-          <label>
-            <input [value]="item.quantity" (keyup)="onEnterKeyPressed($event)" title="Quantity" type="text" class="text-sm" />
-          </label>
-        </div>
-        <div class="div7 text-sm dark-grey">
-          <label>
-            <input value="£ {{item.price}}" (keyup)="onEnterKeyPressed($event)" title="Price" type="text" class="text-sm" />
-          </label>
-        </div>
-        <div class="div8 text-sm dark-grey">
-          <label>
-            <input disabled value="£ {{(item.price * item.quantity).toFixed(2)}}" (keyup)="onEnterKeyPressed($event)" title="Total" type="text" class="text-sm" />
-          </label>
-        </div>
-        <button type="button" title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
+      <div class="flex-row">
+          <app-input [formControl]="getFormControl('senderCity')" inputTitle="City" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderCity')" controlName="senderCity" />
+          <app-input [formControl]="getFormControl('senderPostCode')" class="gap-around" inputTitle="Post Code" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderPostCode')" controlName="senderPostCode" />
+          <app-input [formControl]="getFormControl('senderCountry')" inputTitle="Country" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderCountry')" controlName="senderCountry" />
       </div>
-    }
+    </section>
+
+    <section>
+      <h4 class="form-head text-sm font-medium">Bill To</h4>
+      <app-input [formControl]="getFormControl('clientName')" inputTitle="Client's Name" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientName')" controlName="clientName" />
+      <app-input [formControl]="getFormControl('clientEmail')" inputType="email" inputTitle="Client's Email" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientEmail')" controlName="clientEmail" />
+      <app-input [formControl]="getFormControl('clientStreet')" inputTitle="Street Address" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientStreet')" controlName="clientStreet" />
+
+
+      <div class="flex-row">
+        <app-input [formControl]="getFormControl('clientCity')" inputTitle="City" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientCity')" controlName="clientCity" />
+        <app-input [formControl]="getFormControl('clientPostCode')" class="gap-around" inputTitle="Post Code" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientPostCode')" controlName="clientPostCode" />
+        <app-input [formControl]="getFormControl('clientStreet')" inputTitle="Country" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientCountry')" controlName="clientCountry" />
+      </div>
+
+      <div class="flex-row form-set">
+        <app-input [formControl]="getFormControl('invoiceDate')" inputType="date" inputTitle="Invoice Date" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('invoiceDate')" controlName="invoiceDate" />
+        <app-input [formControl]="getFormControl('paymentTerms')" inputTitle="Payment Terms" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('paymentTerms')" controlName="paymentTerms" />
+      </div>
+    </section>
+
+    <section>
+      <h4 class="font-medium dark-grey" style="margin-bottom: 15px;">Bill To</h4>
+      <div class="parent">
+        <div class="div5 text-sm dark-grey form-text">Item Name</div>
+        <div class="div6 text-sm dark-grey form-text">Qty</div>
+        <div class="div7 text-sm dark-grey form-text">Price</div>
+        <div class="div8 text-sm dark-grey form-text">Total</div>
+        <div class="div9 text-sm dark-grey form-text"></div>
+      </div>
+
+      @for (item of newItems; track item.id) {
+        <div class="parent">
+          <app-input [formControl]="getFormControl('senderStreet')" class="div5 text-sm dark-grey" [hideLabelText]="true" [inputValue]="item.name" inputTitle="Name" (onNext)="onEnterKeyPressed($event)" />
+          <app-input [formControl]="getFormControl('senderStreet')" class="div6 text-sm dark-grey" [hideLabelText]="true" [inputValue]="item.quantity" inputTitle="Quantity" (onNext)="onEnterKeyPressed($event)" />
+          <app-input [formControl]="getFormControl('senderStreet')" class="div7 text-sm dark-grey" [hideLabelText]="true" inputValue="£ {{item.price}}" inputTitle="Price" (onNext)="onEnterKeyPressed($event)" />
+          <app-input [formControl]="getFormControl('senderStreet')" [disabled]="true" class="div8 text-sm dark-grey" [hideLabelText]="true" inputValue="£ {{(item.price * item.quantity).toFixed(2)}}" inputTitle="Total" (onNext)="onEnterKeyPressed($event)" />
+          <button type="button" title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
+        </div>
+      }
+    </section>
 
     <div class="flex-row new-item-button-container">
       <button type="button" (click)="onAddNewItem($event)" class="new-item-button" app-button buttonType="neutral" title="Add New Item">Add New Item</button>
@@ -114,8 +63,8 @@
         <button type="button" app-button buttonType="neutral" title="Discard">Discard</button>
       </div>
       <div>
-        <button type="button" app-button buttonType="neutral" title="Save as Draft" style="margin-right: 10px;">Save as Draft</button>
-        <button type="button" app-button buttonType="default" title="Save & Send">Save & Send</button>
+        <button type="button" app-button buttonType="neutral" title="Save as Draft" style="margin-right: 10px;"></button>
+        <button type="button" app-button buttonType="default" title="Save & Send"></button>
       </div>
     </div>
   </section>

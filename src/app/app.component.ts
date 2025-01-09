@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { IconComponent } from './icon/icon.component';
@@ -39,12 +39,11 @@ export class AppComponent implements OnInit {
   detailsView = !true;
   showForm = false;
   showDialog = false;
+  viewAsHompage = true;
   filters: Badges | '' = '';
-
   invoices$: Observable<Invoice[]>;
   countPending$: Observable<number>;
   filteredInvoices: Invoice[] = [];
-  viewAsHompage: boolean = true;
 
   constructor(
     private store: Store<AppStore>,
@@ -52,9 +51,9 @@ export class AppComponent implements OnInit {
     public globalService: GlobalService
   ) {
     this.invoices$ = this.store.select(selectAllInvoices);
-    this.invoices$.subscribe((data)=>{
-      this.filterItems(data)
-    })
+    this.invoices$.subscribe((data) => {
+      this.filterItems(data);
+    });
 
     this.countPending$ = this.invoices$.pipe(
       map((invoices: Invoice[]) =>
@@ -82,12 +81,13 @@ export class AppComponent implements OnInit {
   }
 
   filterItems(items: Invoice[]) {
-    this.filteredInvoices = this.filters.length<1? items:items.filter(
-      (item) => item.status === this.filters
-    );
+    this.filteredInvoices =
+      this.filters.length < 1
+        ? items
+        : items.filter((item) => item.status === this.filters);
   }
 
-  onFilter(status: typeof this.filters){
+  onFilter(status: typeof this.filters) {
     this.filters = status;
     this.invoices$.subscribe((data) => {
       this.filterItems(data);
@@ -100,6 +100,3 @@ export class AppComponent implements OnInit {
     this.globalService.deleting = false;
   }
 }
-
-
-type Invoices = Invoice[];

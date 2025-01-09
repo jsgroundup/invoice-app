@@ -1,11 +1,12 @@
-<label [formGroup]="form">
+<label>
   @if(!hideLabelText){
     <div class="text-sm dark-grey form-text">{{inputTitle}}</div>
   }
   @if(typeof inputValue!=='undefined'){
-    <input [value]="inputValue" [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''" [formControlName]="controlName" />
+    <input [value]="inputValue" [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''" [formControl]="formControl" />
   }
   @else {
-    <input [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''" [formControlName]="controlName" />
+    <input [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''"  [formControl]="formControl"/>
   }
 </label>
+
