@@ -1,0 +1,14 @@
+<button
+  (click)="toggleTheme()"
+  [attr.aria-label]="isLightMode?'Switch to dark mode': 'Switch to light mode'"
+  app-icon [name]="isLightMode?'moon':'sun'"
+>
+Change theme
+</button>
+
+
+<div class="divider"></div>
+
+<button aria-label="My profile" class="profile">
+  <img src="../../assets/images/image-avatar.jpg" alt="Profile image"/>
+</button>

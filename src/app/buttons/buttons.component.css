@@ -1,0 +1,41 @@
+:host {
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+}
+
+:host.default{
+  background-color: rgb(var(--primary-color));
+}
+:host.default:hover,:host.default:disabled {
+  background-color: rgb(var(--light-primary-color));
+}
+
+:host.danger {
+  background-color: rgb(var(--error-color));
+}
+:host.danger:hover {
+  background-color: rgba(var(--error-color), 0.8);
+}
+
+:host.neutral{
+  background-color: var(--neutral-color);
+}
+
+:host.neutral:hover{
+  background-color: rgb(var(--light-grey));
+}
+
+:host .button-text {
+  color: rgb(var(--white));
+}
+
+:host.neutral .button-text{
+  color: var(--dark-grey-color);
+}
+
+:host.neutral:hover .button-text{
+  color: rgb(var(--dark-grey));
+}

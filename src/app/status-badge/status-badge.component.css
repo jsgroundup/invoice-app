@@ -1,0 +1,62 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  padding: 7px;
+  border-radius: 6px;
+  margin-right: 15px;
+  min-width: 70px;
+  justify-content: center;
+}
+
+:host .point {
+  width: 6px;
+  height: 6px;
+  border-radius: 100px;
+  margin-right: 6px;
+}
+
+/* Pending status styles */
+:host.pending {
+  background-color: rgba(var(--pending-color), 0.1);
+}
+
+:host.pending .point {
+  background-color: rgb(var(--pending-color));
+}
+
+:host.pending .status-text {
+  color: rgb(var(--pending-color));
+}
+
+/* Paid status styles */
+:host.paid {
+  background-color: rgba(var(--success-color), 0.1);
+}
+
+:host.paid .point {
+  background-color: rgb(var(--success-color));
+}
+
+:host.paid .status-text {
+  color: rgb(var(--success-color));
+}
+
+/* Draft status styles */
+:host.draft {
+  background-color: var(--neutral-color);
+}
+
+:host.draft .point {
+  background-color: var(--sidebar-color);
+}
+
+:host.draft .status-text {
+  color: var(--sidebar-color);
+}
+
+.status-text{
+  text-transform: capitalize;
+}
