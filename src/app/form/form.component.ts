@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { InputsComponent } from '../inputs/inputs.component';
 import { createForm } from './forms';
 import Actions from '../../store/actions/invoices';
+import { CalendarComponent } from '../calendar/calendar.component';
+import { DropdownComponent } from "../drop-down/drop-down.component";
 
 @Component({
   selector: 'app-form',
@@ -24,8 +26,10 @@ import Actions from '../../store/actions/invoices';
     IconComponent,
     ButtonsComponent,
     PopupOverlayComponent,
-    InputsComponent
-  ],
+    InputsComponent,
+    CalendarComponent,
+    DropdownComponent
+],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
 })
@@ -106,9 +110,7 @@ export class FormComponent {
   }
 
   onExit() {
-    this.globalService.editing = false;
-    this.globalService.adding = false;
-    this.globalService.deleting = false;
+    this.globalService.resetForm()
   }
 
   onSave(saveAs: 'new' | 'update') {
