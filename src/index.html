@@ -39,8 +39,10 @@
       --sidebar-color: rgb(55, 59, 83);
       --grey-bg: rgb(var(--light-grey));
       --input-border-color: rgb(var(--light-grey));
-      --input-bg: transparent;
+      --input-bg: rgb(var(--white));
       --form-bg: rgb(var(--white));
+
+      --scroll-bar: thin;
     }
 
     [data-theme="dark"]{
@@ -55,6 +57,8 @@
       --input-border-color: transparent;
       --input-bg: rgb(var(--secondary-color));
       --form-bg: rgb(var(--dark-bg));
+
+      --scroll-bar: none;
     }
 
     /* Font faces */
@@ -88,7 +92,7 @@
         transition-duration: .3s;
         transition-timing-function: ease-in;
         font-family: 'Spartan', sans-serif;
-        scrollbar-width:thin;
+        scrollbar-width: var(--scroll-bar);
 
     }
 
