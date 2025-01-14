@@ -10,7 +10,7 @@
       </div>
 
       <div class="flex-row">
-        <button app-filter (onFilter)="onFilter($event)" class="flex-row">Filter</button>
+        <app-filter (onFilter)="onFilter($event)" class="flex-row" />
 
           <button (click)="onNewInvoice()" class="app-button flex-row">
             <span app-icon name="plus" class="plus-icon-container"></span>

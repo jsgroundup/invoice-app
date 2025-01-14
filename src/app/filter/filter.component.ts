@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Badges } from '../status-badge/status-badge.component';
 
 @Component({
-  selector: '[app-filter]',
+  selector: 'app-filter',
   standalone: true,
   imports: [CommonModule, IconComponent],
   templateUrl: './filter.component.html',
