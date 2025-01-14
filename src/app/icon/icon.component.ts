@@ -17,5 +17,6 @@ export class IconComponent {
     | 'check'
     | 'moon'
     | 'sun'
-    | 'delete';
+    | 'delete'
+    | 'calendar'
 }
