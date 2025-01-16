@@ -28,18 +28,18 @@
         <div class="flex-row">
           <app-input [formControl]="getFormControl('clientCity')" inputTitle="City" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientCity')" controlName="clientCity" />
           <app-input [formControl]="getFormControl('clientPostCode')" class="gap-around" inputTitle="Post Code" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientPostCode')" controlName="clientPostCode" />
-          <app-input [formControl]="getFormControl('clientStreet')" inputTitle="Country" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientCountry')" controlName="clientCountry" />
+          <app-input [formControl]="getFormControl('clientCountry')" inputTitle="Country" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('clientCountry')" controlName="clientCountry" />
         </div>
 
         <div class="flex-row form-set">
-          <app-calendar />
-          <app-dropdown />
+          <app-calendar (onDateSelected)="setDate($event)" />
+          <app-dropdown (onSelection)="setPaymentTerm($event)" />
           <!-- <app-input [formControl]="getFormControl('invoiceDate')" inputType="date" inputTitle="Invoice Date" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('invoiceDate')" controlName="invoiceDate" /> -->
           <!-- <app-input [formControl]="getFormControl('paymentTerms')" inputTitle="Payment Terms" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('paymentTerms')" controlName="paymentTerms" /> -->
         </div>
       </section>
 
-      <section>
+      <section formArrayName="formItems">
         <h4 class="font-medium dark-grey" style="margin-bottom: 15px;">Bill To</h4>
         <div class="parent">
           <div class="div5 text-sm dark-grey form-text">Item Name</div>
@@ -50,12 +50,12 @@
         </div>
 
         @for (item of newItems; track item.id) {
-          <div class="parent">
-            <app-input [formControl]="getFormControl('senderStreet')" class="div5 text-sm dark-grey" [hideLabelText]="true" [inputValue]="item.name" inputTitle="Name" (onNext)="onEnterKeyPressed($event)" />
-            <app-input [formControl]="getFormControl('senderStreet')" class="div6 text-sm dark-grey" [hideLabelText]="true" [inputValue]="item.quantity" inputTitle="Quantity" (onNext)="onEnterKeyPressed($event)" />
-            <app-input [formControl]="getFormControl('senderStreet')" class="div7 text-sm dark-grey" [hideLabelText]="true" inputValue="£ {{item.price}}" inputTitle="Price" (onNext)="onEnterKeyPressed($event)" />
-            <app-input [formControl]="getFormControl('senderStreet')" [disabled]="true" class="div8 text-sm dark-grey" [hideLabelText]="true" inputValue="£ {{(item.price * item.quantity).toFixed(2)}}" inputTitle="Total" (onNext)="onEnterKeyPressed($event)" />
-            <button type="button" title="Delete" (click)="onDeleteItem(item.id, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
+          <div class="parent" [formGroupName]="$index">
+            <app-input [inputValue]="item.name" [errored]="!!itemControllErrored($index, 'name')" [formControl]="getItemControl($index, 'name')" class="div5 text-sm dark-grey" [hideLabelText]="true" inputTitle="Name" (onNext)="onEnterKeyPressed($event)" />
+            <app-input [inputValue]="item.quantity"  [errored]="!!itemControllErrored($index, 'quantity')" [formControl]="getItemControl($index, 'quantity')" class="div6 text-sm dark-grey" [hideLabelText]="true" inputTitle="Quantity" (onNext)="onEnterKeyPressed($event)" />
+            <app-input [inputValue]="item.price"  [errored]="!!itemControllErrored($index, 'price')" [formControl]="getItemControl($index, 'price')" class="div7 text-sm dark-grey" [hideLabelText]="true" [inputValue]="getItemControl($index, 'price').value" inputTitle="Price" (onNext)="onEnterKeyPressed($event)" />
+            <app-input [formControl]="getItemControl($index, 'total')" class="div8 text-sm dark-grey" [hideLabelText]="true" inputValue="£ {{(item.total).toFixed(2)}}" inputTitle="Total" (onNext)="onEnterKeyPressed($event)" />
+            <button type="button" title="Delete" (click)="onDeleteItem(item.id, $index, $event)" aria-label="Delete" class="div9 delete-button" app-icon name="delete"></button>
           </div>
         }
       </section>
@@ -66,11 +66,11 @@
 
       <div class="actions flex-row">
         <div>
-          <button *ngIf="globalService.adding" type="button" app-button buttonType="neutral" title="Discard">Discard</button>
+          <button (click)="onExit()" *ngIf="globalService.adding" type="button" app-button buttonType="neutral" title="Discard">Discard</button>
         </div>
         <div>
-          <button type="button" app-button buttonType="neutral" [title]="globalService.adding?'Save as Draft':'Cancel'" style="margin-right: 10px;"></button>
-          <button type="button" app-button buttonType="default" [title]="globalService.adding?'Save & Send':'Save Changes'"></button>
+          <button (click)="onSave(true)" type="button" app-button buttonType="neutral" [title]="globalService.adding?'Save as Draft':'Cancel'" style="margin-right: 10px;"></button>
+          <button (click)="onSave()" type="button" app-button buttonType="default" [title]="globalService.adding?'Save & Send':'Save Changes'"></button>
         </div>
       </div>
     </section>

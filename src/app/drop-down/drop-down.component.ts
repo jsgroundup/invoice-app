@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
@@ -10,16 +10,25 @@ import { IconComponent } from '../icon/icon.component';
   styleUrl: './drop-down.component.css',
 })
 export class DropdownComponent {
-  dropdownOpen: boolean = false;
-  selectedOption: string = 'Select an option';
-  options: string[] = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+  @Input() selectedOption: string = 'Select an option';
+  @Output() onSelection: EventEmitter<number> = new EventEmitter<number>();
 
-  toggleDropdown() {
+  dropdownOpen: boolean = false;
+  options: string[] = ['Net 1 Day', 'Net 7 Days', 'Net 14 Days', 'Net 30 Days'];
+  optionValues: { [k: string]: number } = {
+    'Net 1 Day': 1,
+    'Net 7 Days': 7,
+    'Net 14 Days': 14,
+    'Net 30 Days': 30,
+  };
+
+  onToggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  selectOption(option: string) {
-    this.selectedOption = option;
+  onSelectOption(option: string) {
     this.dropdownOpen = false;
+    this.selectedOption = option;
+    this.onSelection.emit(this.optionValues[option]);
   }
 }

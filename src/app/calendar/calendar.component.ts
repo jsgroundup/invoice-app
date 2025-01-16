@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { CommonModule } from '@angular/common';
 
@@ -18,9 +18,21 @@ export class CalendarComponent implements OnInit {
   @ViewChild('calendarTitle', { static: true }) calendarTitle:
     | ElementRef
     | undefined;
+  @Output('onDateSelected') dateSelectEvent = new EventEmitter<string>();
 
   currentDate: Date = new Date();
-  selectedDate: string = '';
+
+  private _selecTedDate: string = '';
+
+  get selectedDate(): string {
+    return this._selecTedDate;
+  }
+
+  set selectedDate(value: string) {
+    this._selecTedDate = value;
+    this.dateSelectEvent.emit(value);
+  };
+
   isCalendarHidden: boolean = true;
 
   // Array to hold the calendar days

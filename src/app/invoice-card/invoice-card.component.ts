@@ -33,7 +33,12 @@ export class InvoiceCardComponent {
     });
   }
 
+  calculateTotal(items: any) {
+    return items.reduce((acc: number, item: any) => acc + item.total, 0);
+  }
+
   formatDate(date?: string) {
+
     return new Intl.DateTimeFormat('en-GB', {
       day: 'numeric',
       month: 'short',
