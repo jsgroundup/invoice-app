@@ -13,9 +13,9 @@
     </div>
 
     <div class="flex-row actions">
-      <button (click)="onEdit()" class="action-button" app-button buttonType="neutral" title="Edit" ></button>
-      <button (click)="onDelete()" class="action-button" app-button buttonType="danger" title="Delete" ></button>
-      <button (click)="markAsPaid(invoiceData.id)" [disabled]="invoiceData.status==='draft'" class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
+      <button type="button" (click)="onEdit()" class="action-button" app-button buttonType="neutral" title="Edit" ></button>
+      <button type="button" (click)="onDelete()" class="action-button" app-button buttonType="danger" title="Delete" ></button>
+      <button type="button" (click)="markAsPaid(invoiceData.id)" [disabled]="invoiceData.status==='draft'" class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
     </div>
   </div>
 
@@ -65,11 +65,9 @@
     <div class="price-details">
       <div class="grid-item-container price-details-item screen-large-grid">
         <div class="grid-item-1 dark-grey text-sm">Item Name</div>
-        <!-- <div class="right-columns flex-row"> -->
           <div class="grid-item-2 column dark-grey text-sm">QTY</div>
           <div class="grid-item-3 column dark-grey text-sm">Price</div>
           <div class="grid-item-4 column dark-grey text-sm">Total</div>
-        <!-- </div> -->
       </div>
 
       @for (item of invoiceData.items; track item.name) {
@@ -78,11 +76,9 @@
             <div class="font-medium details-text">{{item.name}}</div>
             <div class="details-text dark-grey font-medium screen-small">{{item.quantity}} x £ {{formatAmount(item.price)}}</div>
           </div>
-          <!-- <div class="right-columns flex-row"> -->
             <div class="grid-item-2 text-sm column dark-grey font-medium screen-large">{{item.quantity}}</div>
             <div class="grid-item-3 text-sm column dark-grey font-medium screen-large">£ {{formatAmount(item.price)}}</div>
             <div class="grid-item-4 text-smolumn font-medium">£ {{formatAmount(item.total)}}</div>
-          <!-- </div> -->
         </div>
       }
 
