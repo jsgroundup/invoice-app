@@ -1,0 +1,28 @@
+<!-- <app-popup-overlay (onClose)="onClose()" /> -->
+<!-- <div class="container"> -->
+  <form>
+
+    <section class="form-space" [formGroup]="form" >
+      <div class="form-header">
+        <h2 class="text-lg font-bold">Sign in</h2>
+        <p class="dark-grey text-md">Sign in to manage your invoices</p>
+      </div>
+
+      <div class="form-group" >
+        <app-input inputTitle="Email" [formControl]="getFormControl('email')" inputType="text" />
+        <app-input inputTitle="Password" [formControl]="getFormControl('password')" inputType="password" />
+        <div>
+          <button type="button" class="action-button" app-button buttonType="default" title="Sign In" ></button>
+        </div>
+        <!-- <app-input [formControl]="getFormControl('senderCity')" inputTitle="City" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderCity')" controlName="senderCity" /> -->
+      </div>
+    </section>
+
+    <section class="illustration-space">
+      <img aria-hidden="true" alt="Empty illustration image" src="../../assets/images/signup.gif" />
+      <div class="illustration-cover"></div>
+    </section>
+
+
+  </form>
+<!-- </div> -->

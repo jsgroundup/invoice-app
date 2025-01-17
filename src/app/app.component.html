@@ -1,50 +1,59 @@
 
 <header app-header></header>
 
-<main *ngIf="viewAsHompage">
-  <div class="content-head">
-      <div>
-        <h2 class="text-lg text-bold">Invoices</h2>
-        <div class="dark-grey text-sm">There are {{countPending$| async}} pending invoices</div>
 
-      </div>
 
-      <div class="flex-row">
-        <app-filter (onFilter)="onFilter($event)" class="flex-row" />
+@if(!userIsLoggedIn()){
+  <!-- Render Log In Screen -->
+  <main>
+    <app-login />
+  </main>
+}
+@else {
+  <main *ngIf="viewAsHompage">
+    <div class="content-head">
+        <div>
+          <h2 class="text-lg text-bold">Invoices</h2>
+          <div class="dark-grey text-sm">There are {{countPending$| async}} pending invoices</div>
 
-          <button (click)="onNewInvoice()" class="app-button flex-row">
-            <span app-icon name="plus" class="plus-icon-container"></span>
-            <span class="button-text text-sm">New <span class="screen-large button-text">Invoice</span></span>
-          </button>
-      </div>
-  </div>
+        </div>
 
-  @if (filteredInvoices.length>0) {
-    <ul>
+        <div class="flex-row">
+          <app-filter (onFilter)="onFilter($event)" class="flex-row" />
 
-      @for (item of filteredInvoices; track item.id) {
-        <li invoice-listitem [invoiceData]="item"></li>
-      }
-
-    </ul>
-  }
-  @else {
-    <div>
-        <img aria-hidden="true" alt="Empty illustration image" src="../assets/images/illustration-empty.svg" />
-        <p class="text-lg text-bold">There is nothing here</p>
-        <div class="dark-grey text-sm" style="margin-bottom: 6px;text-align: center;"> Create an invoice by clicking the </div>
-        <div class="dark-grey text-sm" style="text-align: center;"><span class="text-bold dark-grey">New Invoice</span> button and get started</div>
+            <button (click)="onNewInvoice()" class="app-button flex-row">
+              <span app-icon name="plus" class="plus-icon-container"></span>
+              <span class="button-text text-sm">New <span class="screen-large button-text">Invoice</span></span>
+            </button>
+        </div>
     </div>
-  }
+
+    @if (filteredInvoices.length>0) {
+      <ul>
+
+        @for (item of filteredInvoices; track item.id) {
+          <li invoice-listitem [invoiceData]="item"></li>
+        }
+
+      </ul>
+    }
+    @else {
+      <div>
+          <img aria-hidden="true" alt="Empty illustration image" src="../assets/images/illustration-empty.svg" />
+          <p class="text-lg text-bold">There is nothing here</p>
+          <div class="dark-grey text-sm" style="margin-bottom: 6px;text-align: center;"> Create an invoice by clicking the </div>
+          <div class="dark-grey text-sm" style="text-align: center;"><span class="text-bold dark-grey">New Invoice</span> button and get started</div>
+      </div>
+    }
 
 
-   <app-form *ngIf="globalService.adding" />
-</main>
+    <app-form *ngIf="globalService.adding" />
 
-<main *ngIf="!viewAsHompage">
+  </main>
 
-  <invoice-card />
-  <app-form *ngIf="globalService.editing" />
-  <app-dialog *ngIf="globalService.deleting" />
-
-</main>
+  <main *ngIf="!viewAsHompage">
+    <invoice-card />
+    <app-form *ngIf="globalService.editing" />
+    <app-dialog *ngIf="globalService.deleting" />
+  </main>
+}

@@ -15,6 +15,7 @@ import { selectAllInvoices } from '../store/selectors/invoice';
 import { GlobalService } from './services/global.service';
 import { FilterComponent } from './filter/filter.component';
 import { Badges } from './status-badge/status-badge.component';
+import { LoginComponent } from "./login/login.component";
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import { Badges } from './status-badge/status-badge.component';
     FormComponent,
     DialogComponent,
     FilterComponent,
-  ],
+    LoginComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -69,6 +71,11 @@ export class AppComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.viewAsHompage = !!data['isHome'];
     });
+  }
+
+  userIsLoggedIn() {
+    // TODO: Check if user is logged in
+    return false;
   }
 
   countPending() {

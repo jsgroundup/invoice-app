@@ -1,0 +1,147 @@
+
+:host{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    overflow: auto;
+}
+
+
+form{
+  background-color: #ffffff;
+  border-radius: 35px;
+  max-width: 1000px;
+  width: 100%;
+  min-height: 450px;
+  flex-direction: row;
+  overflow: hidden;
+  display: flex;
+}
+
+.illustration-space{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  padding: 25px;
+}
+
+.illustration-cover{
+  position: absolute;
+  inset: 0;
+}
+
+img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.form-space{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  padding: 25px;
+  background-color: rgba(240, 248, 255, 0.404);
+}
+
+.form-header{
+  max-width: 330px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.form-group{
+  max-width: 330px;
+  width: 100%;
+  margin-bottom: 25px;
+
+}
+
+.input{
+  width: 100%;
+}
+
+.action-button{
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+
+@media screen and (max-width: 1040px){
+  form{
+    max-width: 900px;
+  }
+
+}
+
+@media screen and (max-width: 960px) {
+  form {
+    max-width: 800px;
+  }
+
+}
+
+
+@media screen and (max-width: 860px) {
+  form {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .illustration-space {
+    display: none;
+    visibility: hidden;
+  }
+
+  .form-space {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 770px) {
+  :host{
+    background-color: #f9fcff;
+    justify-content: flex-start;
+  }
+  .illustration-space {
+    display: flex;
+    visibility: visible;
+    width: 100%;
+    background-color: #ffffff;
+  }
+  img{
+    width: 90%;
+    max-width: 450px;
+    min-height: 200px;
+  }
+  form{
+    flex-direction: column-reverse;
+    width: 100%;
+    border-radius: 0px;
+  }
+  .form-group, .form-header{
+    max-width: 500px;
+  }
+  .input{
+    width: 90%;
+  }
+}
+
