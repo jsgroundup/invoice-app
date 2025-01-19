@@ -9,12 +9,11 @@
       </div>
 
       <div class="form-group" >
-        <app-input inputTitle="Email" [formControl]="getFormControl('email')" inputType="text" />
-        <app-input inputTitle="Password" [formControl]="getFormControl('password')" inputType="password" />
+        <app-input inputTitle="Email" [errored]="!!controllErrored('email')" [formControl]="getFormControl('email')" inputType="text" />
+        <app-input inputTitle="Password" [errored]="!!controllErrored('password')" [formControl]="getFormControl('password')" inputType="password" />
         <div>
-          <button type="button" class="action-button" app-button buttonType="default" title="Sign In" ></button>
+          <button (click)="onSignIn()" type="button" class="action-button" app-button buttonType="default" title="Sign In" ></button>
         </div>
-        <!-- <app-input [formControl]="getFormControl('senderCity')" inputTitle="City" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('senderCity')" controlName="senderCity" /> -->
       </div>
     </section>
 
@@ -25,4 +24,13 @@
 
 
   </form>
+  <div *ngIf="authenticating||loadingInvoices" class="loader-overlay center">
+    <div class="loader-container center zoom-in">
+        <div class="center">
+          <div class="spinner"></div>
+          <p *ngIf="authenticating" class="text-sm font-normal dark-grey slide-up">Signing you in. <br> Please wait a minute...</p>
+          <p *ngIf="loadingInvoices" class="text-sm font-normal dark-grey slide-up">Loading your invoices. <br> Please wait a minute...</p>
+        </div>
+    </div>
+  </div>
 <!-- </div> -->
