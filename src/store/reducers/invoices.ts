@@ -2,8 +2,10 @@ import { createReducer, on } from "@ngrx/store";
 import Invoices, { Invoice } from "../../data/data";
 import Actions from '../actions/invoices'
 
+const data: Invoice[] = []
 export const invoiceReducer = createReducer(
-  Invoices,
+  data,
+  on(Actions.addInitial, (store, { invoices }) => invoices),
   on(Actions.delete, (store, { id }) => {
     return store.filter((data) => data.id !== id);
   }),

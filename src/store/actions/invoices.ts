@@ -4,7 +4,8 @@ import { Badges } from "../../app/status-badge/status-badge.component";
 
 const getAction = (action: string)=> `[Invoice] ${action}`
 
-export default {
+const Actions = {
+  addInitial: createAction(getAction('add initial'), props<{ invoices: Invoice[] }>()),
   // Delete invoice
   delete: createAction(getAction('delete'), props<{ id: string }>()),
 
@@ -20,4 +21,6 @@ export default {
     props<{ id: string; status: Badges }>()
   ),
 };
+
+export default Actions;
 

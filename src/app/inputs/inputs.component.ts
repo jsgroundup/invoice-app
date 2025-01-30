@@ -20,15 +20,20 @@ export class InputsComponent implements ControlValueAccessor {
   @Input() inputValue?: string | number | boolean | null;
   @Input() disabled: boolean = false;
   @Input() formControl!: FormControl<string | null>;
-  @Self() ngControl = inject(NgControl)
+  @Self() ngControl = inject(NgControl);
 
   constructor() {
     this.ngControl.valueAccessor = this;
   }
   onNext = output<KeyboardEvent>();
+  onFocus = output<FocusEvent>();
 
   onEnterKeyPressed(e: KeyboardEvent) {
-    this.onNext.emit(e);
+    this.onNext?.emit(e);
+  }
+
+  onFocused(e: FocusEvent) {
+    this.onFocus?.emit(e);
   }
 
   writeValue(obj: any): void {}

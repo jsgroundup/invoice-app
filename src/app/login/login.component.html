@@ -1,5 +1,4 @@
-<!-- <app-popup-overlay (onClose)="onClose()" /> -->
-<!-- <div class="container"> -->
+
   <form>
 
     <section class="form-space" [formGroup]="form" >
@@ -9,8 +8,8 @@
       </div>
 
       <div class="form-group" >
-        <app-input inputTitle="Email" [errored]="!!controllErrored('email')" [formControl]="getFormControl('email')" inputType="text" />
-        <app-input inputTitle="Password" [errored]="!!controllErrored('password')" [formControl]="getFormControl('password')" inputType="password" />
+        <app-input (onFocus)="onFocus()" inputTitle="Email" [errored]="!!controllErrored('email')" [formControl]="getFormControl('email')" inputType="text" />
+        <app-input (onFocus)="onFocus()" inputTitle="Password" [errored]="!!controllErrored('password')" [formControl]="getFormControl('password')" inputType="password" />
         <div>
           <button (click)="onSignIn()" type="button" class="action-button" app-button buttonType="default" title="Sign In" ></button>
         </div>
@@ -24,13 +23,11 @@
 
 
   </form>
-  <div *ngIf="authenticating||loadingInvoices" class="loader-overlay center">
-    <div class="loader-container center zoom-in">
-        <div class="center">
-          <div class="spinner"></div>
-          <p *ngIf="authenticating" class="text-sm font-normal dark-grey slide-up">Signing you in. <br> Please wait a minute...</p>
-          <p *ngIf="loadingInvoices" class="text-sm font-normal dark-grey slide-up">Loading your invoices. <br> Please wait a minute...</p>
-        </div>
-    </div>
-  </div>
-<!-- </div> -->
+
+  <!-- Loading Popup -->
+  <app-loader
+    *ngIf="authenticating||loadingInvoices"
+    [message]="authenticating ? loadingMessages.authenticating:loadingMessages.loadingInvoices"
+    [state]="noInternetConection?'retry':'load'"
+    (onRetry)="retry()"
+  />

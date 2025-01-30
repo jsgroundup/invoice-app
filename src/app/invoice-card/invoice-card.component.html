@@ -4,7 +4,7 @@
   <span class="text-sm text-bold back-button-text">Go back</span>
 </button>
 
-<div class="card-container" *ngIf="invoiceData | async as invoiceData">
+<div class="card-container" *ngIf="!!invoiceData">
 
   <div class="action-bar flex-row">
     <div class="flex-row status">
@@ -93,3 +93,11 @@
   </div>
 
 </div>
+
+<!-- Loading Popup -->
+  <app-loader
+    *ngIf="loadingInvoiceData"
+    [message]="loadingMessages"
+    [state]="noInternetConection?'retry':'load'"
+    (onRetry)="retry()"
+  />

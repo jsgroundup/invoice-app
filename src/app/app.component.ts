@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { IconComponent } from './icon/icon.component';
@@ -16,6 +16,8 @@ import { GlobalService } from './services/global.service';
 import { FilterComponent } from './filter/filter.component';
 import { Badges } from './status-badge/status-badge.component';
 import { LoginComponent } from "./login/login.component";
+import { NetworkingService } from './services/networking.service';
+import Actions from '../store/actions/invoices';
 
 @Component({
   selector: 'app-root',
@@ -49,8 +51,10 @@ export class AppComponent implements OnInit {
 
   constructor(
     private store: Store<AppStore>,
+    private navigation: Router,
     private route: ActivatedRoute,
-    public globalService: GlobalService
+    public globalService: GlobalService,
+    private network: NetworkingService
   ) {
     this.invoices$ = this.store.select(selectAllInvoices);
     this.invoices$.subscribe((data) => {
@@ -70,12 +74,40 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.viewAsHompage = !!data['isHome'];
+
+      if(this.viewAsHompage) {
+        if (this.filteredInvoices.length < 1){
+          // Invoice data is empty, try loading invoinces
+          this.network.loadInvoices({
+            token: this.globalService.token,
+            onNext: (invoices) => {
+              // Save the invoices in the store
+              this.store.dispatch(
+                Actions.addInitial({ invoices: invoices as Array<Invoice> })
+              );
+            },
+            onError: (error) => {
+              if (error.status === 401) {
+                // Token expired
+                this.globalService.token = '';
+                localStorage.removeItem('token');
+
+                // Redirect to login page
+                this.navigation.navigate(['/']);
+                return;
+              }
+            },
+          });
+          return;
+        }
+      }
+
     });
   }
 
   userIsLoggedIn() {
-    // TODO: Check if user is logged in
-    return false;
+    this.globalService.token = localStorage.getItem('token')|| '';
+    return !!this.globalService.token;
   }
 
   countPending() {

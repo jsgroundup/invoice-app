@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GlobalService {
-
-  constructor() { }
-
-  adding = false
+  adding = false;
   editing = false;
   deleting = false;
-
   idCounts = 0;
+  token = '';
+
+  constructor() {
+    this.token = localStorage.getItem('token') || '';
+  }
+
   generateId() {
     // Generate two random alphabets
     const randomAlphabets = Math.random().toString(36).substring(2, 4);
