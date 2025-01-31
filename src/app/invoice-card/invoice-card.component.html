@@ -96,8 +96,9 @@
 
 <!-- Loading Popup -->
   <app-loader
-    *ngIf="loadingInvoiceData"
+    *ngIf="loadingInvoiceData||noInternetConection"
     [message]="loadingMessages"
     [state]="noInternetConection?'retry':'load'"
     (onRetry)="retry()"
+    [setBackground]="false"
   />

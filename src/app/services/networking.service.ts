@@ -52,10 +52,23 @@ export class NetworkingService {
       });
   }
   loadInvoiceData({ invoiceId, onNext, onError }: LoadInvoiceDataProps) {
-    const token = this.globalService.token;
     // Request for data
-    return this.http
-      .get<Invoice>(`${this.apiUrl}/invoices/${invoiceId}`, {
+    this.performNetworkRequest({ invoiceId, onNext, onError, action: 'get' });
+  }
+
+  deleteInvoiceData({ invoiceId, onNext, onError }: LoadInvoiceDataProps) {
+    // Request for data
+    this.performNetworkRequest({ invoiceId, onNext, onError, action: 'delete' });
+  }
+
+  performNetworkRequest<T>({
+    invoiceId,
+    onNext,
+    onError,
+    action
+  }: LoadInvoiceDataProps & { action: keyof HttpClient }) {
+    const token = this.globalService.token;
+    return this.http[action as 'get' ]<Invoice>(`${this.apiUrl}/invoices/${invoiceId}`, {
         headers: {
           Authorization: `Bearer ${token || ''}`,
         },
@@ -63,7 +76,7 @@ export class NetworkingService {
       .subscribe({
         next: onNext,
         error: (err) => {
-          if(err.status > 399 && err.status < 404) {
+          if (err.status > 399 && err.status < 404) {
             // Token expired
             this.globalService.token = '';
             localStorage.removeItem('token');

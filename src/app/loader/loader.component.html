@@ -1,5 +1,5 @@
 
-  <div class="loader-container center zoom-in">
+  <div class="loader-container center zoom-in {{setBackground?'loader-container-background':''}}" >
     @if(!isStatus('retry')){
       <div class="center">
         <div class="spinner"></div>
@@ -9,7 +9,7 @@
     @else {
       <div class="center">
         <div>
-          <button (click)="retry()" type="button" class="action-button" style="margin-bottom:15px;" app-button buttonType="default"  title="Try Again" >Try Again</button>
+          <button (click)="retry()" type="button" class="action-button" style="margin-bottom:15px;" app-button buttonType="default"  title="Try Again" ></button>
         </div>
         <p class="text-sm font-normal dark-grey slide-up" style="margin-top: 0px;">Oops! No internte connection. <br> Reconnect and try again</p>
       </div>

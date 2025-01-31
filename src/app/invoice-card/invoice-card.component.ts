@@ -94,23 +94,22 @@ export class InvoiceCardComponent implements OnInit, OnDestroy {
   loadInvoiceData() {
     this.loadingInvoiceData = true;
     // Loads invoinces data before page loads
-    // this.network.loadInvoiceData({
-    //   invoiceId: this.invoiceId,
-    //   onNext: (invoice) => {
-    //     this.loadingInvoiceData = false;
-
-    //     console.log(invoice);
-
-    //     this.invoiceData = invoice;
-    //   },
-    //   onError: (error) => {
-    //     this.loadingInvoiceData = false;
-    //     if(error.status === 0){
-    //       this.noInternetConection = true;
-    //       return;
-    //     }
-    //   },
-    // });
+    this.timeout = setTimeout(() => {
+      this.network.loadInvoiceData({
+        invoiceId: this.invoiceId,
+        onNext: (invoice) => {
+          this.loadingInvoiceData = false;
+          this.invoiceData = invoice;
+        },
+        onError: (error) => {
+          this.loadingInvoiceData = false;
+          if (error.status === 0) {
+            this.noInternetConection = true;
+            return;
+          }
+        },
+      });
+    }, 2000);
   }
 
   retry() {

@@ -30,4 +30,5 @@
     [message]="authenticating ? loadingMessages.authenticating:loadingMessages.loadingInvoices"
     [state]="noInternetConection?'retry':'load'"
     (onRetry)="retry()"
+    [setBackground]="true"
   />

@@ -36,11 +36,13 @@ import { CurrencyPipe } from './currency.pipe';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
+
   formState!: FormGroup<
     { [k in keyof FormFields]: FormControl<string | null> } & {
       formItems: FormArray<ReturnType<typeof createItemInputFeilds>>;
     }
   >;
+
   invoice!: Observable<Invoice>;
   newItems: (Invoice['items'][number] & { id: string })[] = [];
   editingInvoiceId: string = '';
@@ -308,23 +310,6 @@ export class FormComponent {
     this.formState.controls.invoiceDate.setValue(date);
   }
 }
-
-const FormFieldKeys: (keyof FormFields)[] = [
-  'senderStreet',
-  'senderCity',
-  'senderPostCode',
-  'senderCountry',
-
-  'clientEmail',
-  'clientName',
-  'clientStreet',
-  'clientCity',
-  'clientPostCode',
-  'clientCountry',
-
-  'invoiceDate',
-  'paymentTerms',
-]
 
 export interface FormFields{
   senderStreet: string;

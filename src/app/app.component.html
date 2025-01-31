@@ -38,12 +38,23 @@
       </ul>
     }
     @else {
-      <div>
+      @if(loadingInvoiceData||noInternetConection){
+        <!-- Loading Popup -->
+        <app-loader
+          [message]="loadingMessages"
+          [state]="noInternetConection?'retry':'load'"
+          (onRetry)="loadInvoiceData()"
+          [setBackground]="false"
+        />
+      }
+      @else {
+        <div>
           <img aria-hidden="true" alt="Empty illustration image" src="../assets/images/illustration-empty.svg" />
           <p class="text-lg text-bold">There is nothing here</p>
           <div class="dark-grey text-sm" style="margin-bottom: 6px;text-align: center;"> Create an invoice by clicking the </div>
           <div class="dark-grey text-sm" style="text-align: center;"><span class="text-bold dark-grey">New Invoice</span> button and get started</div>
-      </div>
+        </div>
+      }
     }
 
 

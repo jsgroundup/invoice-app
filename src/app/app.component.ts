@@ -18,6 +18,7 @@ import { Badges } from './status-badge/status-badge.component';
 import { LoginComponent } from "./login/login.component";
 import { NetworkingService } from './services/networking.service';
 import Actions from '../store/actions/invoices';
+import { LoaderComponent } from './loader/loader.component';
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,9 @@ import Actions from '../store/actions/invoices';
     FormComponent,
     DialogComponent,
     FilterComponent,
-    LoginComponent
-],
+    LoginComponent,
+    LoaderComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -44,6 +46,9 @@ export class AppComponent implements OnInit {
   showForm = false;
   showDialog = false;
   viewAsHompage = true;
+  loadingInvoiceData = false;
+  noInternetConection = false;
+  loadingMessages = ['Loading invoice data.', 'Please wait a minute...'];
   filters: Badges | '' = '';
   invoices$: Observable<Invoice[]>;
   countPending$: Observable<number>;
@@ -75,38 +80,55 @@ export class AppComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.viewAsHompage = !!data['isHome'];
 
-      if(this.viewAsHompage) {
-        if (this.filteredInvoices.length < 1){
+      if (this.viewAsHompage) {
+        if (this.filteredInvoices.length < 1) {
           // Invoice data is empty, try loading invoinces
-          this.network.loadInvoices({
-            token: this.globalService.token,
-            onNext: (invoices) => {
-              // Save the invoices in the store
-              this.store.dispatch(
-                Actions.addInitial({ invoices: invoices as Array<Invoice> })
-              );
-            },
-            onError: (error) => {
-              if (error.status === 401) {
-                // Token expired
-                this.globalService.token = '';
-                localStorage.removeItem('token');
-
-                // Redirect to login page
-                this.navigation.navigate(['/']);
-                return;
-              }
-            },
-          });
+          this.loadInvoiceData();
           return;
         }
       }
-
     });
   }
 
+  loadInvoiceData() {
+    this.loadingInvoiceData = true;
+    this.noInternetConection = false;
+
+    setTimeout(() => {
+      this.network.loadInvoices({
+        token: this.globalService.token,
+
+        onNext: (invoices) => {
+          this.loadingInvoiceData = false;
+          // Save the invoices in the store
+          this.store.dispatch(
+            Actions.addInitial({ invoices: invoices as Array<Invoice> })
+          );
+        },
+
+        onError: (error) => {
+          this.loadingInvoiceData = false;
+          if (error.status === 401) {
+            // Token expired
+            this.globalService.token = '';
+            localStorage.removeItem('token');
+
+            // Redirect to login page
+            this.navigation.navigate(['/']);
+            return;
+          }
+
+          // Show reload button if no internet connection
+          if (error.status === 0) {
+            this.noInternetConection = true;
+          }
+        },
+      });
+    }, 2000);
+  }
+
   userIsLoggedIn() {
-    this.globalService.token = localStorage.getItem('token')|| '';
+    this.globalService.token = localStorage.getItem('token') || '';
     return !!this.globalService.token;
   }
 

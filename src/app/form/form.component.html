@@ -34,8 +34,6 @@
         <div class="flex-row form-set">
           <app-calendar (onDateSelected)="setDate($event)" />
           <app-dropdown (onSelection)="setPaymentTerm($event)" />
-          <!-- <app-input [formControl]="getFormControl('invoiceDate')" inputType="date" inputTitle="Invoice Date" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('invoiceDate')" controlName="invoiceDate" /> -->
-          <!-- <app-input [formControl]="getFormControl('paymentTerms')" inputTitle="Payment Terms" (onNext)="onEnterKeyPressed($event)" [errored]="!!controllErrored('paymentTerms')" controlName="paymentTerms" /> -->
         </div>
       </section>
 
@@ -69,8 +67,8 @@
           <button (click)="onExit()" *ngIf="globalService.adding" type="button" app-button buttonType="neutral" title="Discard">Discard</button>
         </div>
         <div>
-          <button (click)="onSave(true)" type="button" app-button buttonType="neutral" [title]="globalService.adding?'Save as Draft':'Cancel'" style="margin-right: 10px;"></button>
-          <button (click)="onSave()" type="button" app-button buttonType="default" [title]="globalService.adding?'Save & Send':'Save Changes'"></button>
+          <button (click)="onSave(true)" type="button" app-button buttonType="neutral" [title]="globalService.adding?'Save as Draft':'Cancel'" style="margin-right: 10px;">Discard</button>
+          <button (click)="onSave()" type="button" app-button buttonType="default" [title]="globalService.adding?'Save & Send':'Save Changes'">Save</button>
         </div>
       </div>
     </section>

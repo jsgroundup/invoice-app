@@ -7,6 +7,7 @@ import { AppStore } from '../../store';
 import Actions from '../../store/actions/invoices';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NetworkingService } from '../services/networking.service';
 
 @Component({
   selector: 'app-dialog',
@@ -23,7 +24,8 @@ export class DialogComponent {
     public globalService: GlobalService,
     private store: Store<AppStore>,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private network: NetworkingService
   ) {
     this.route.params.subscribe(({ id }) => {
       this.activeInvoiceId = id;
@@ -35,8 +37,20 @@ export class DialogComponent {
   }
 
   confirmDelete(id: string) {
-    this.store.dispatch(Actions.delete({ id }));
-    this.onExit();
-    this.router.navigateByUrl('/');
+    this.network.deleteInvoiceData({
+      invoiceId: id,
+
+      onNext: () => {
+        this.store.dispatch(Actions.delete({ id }));
+        this.onExit();
+        this.router.navigateByUrl('/');
+      },
+
+      onError: (err) => {
+        this.onExit();
+      }
+    });
+
+
   }
 }
