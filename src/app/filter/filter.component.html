@@ -1,0 +1,41 @@
+
+<button
+  aria-haspopup="listbox"
+  [attr.aria-expanded]="expanded"
+
+  class="filter-trigger">
+  <span class="text-sm text-bold filter-text">
+    Filter <span class="screen-large">by status</span>
+  </span>
+  <span app-icon name='arrow-down'></span>
+</button>
+
+<ul *ngIf="expanded"
+    role="listbox"
+    class="filter-dropdown-menu"
+    [attr.aria-activedescendant]="checked">
+  <li role="option"
+      [attr.aria-selected]="checked === 'draft'"
+      (click)="onSelectStatus('draft')"
+      class="checkmark"
+      [class.selected]="checked === 'draft'">
+    <span class="checkmark-icon" app-icon [name]="checked === 'draft' ? 'check' : ''"></span>
+    <span class="checkmark-text text-sm font-medium">Draft</span>
+  </li>
+  <li role="option"
+      [attr.aria-selected]="checked === 'pending'"
+      (click)="onSelectStatus('pending')"
+      class="checkmark"
+      [class.selected]="checked === 'pending'">
+    <span class="checkmark-icon" app-icon [name]="checked === 'pending' ? 'check' : ''"></span>
+    <span class="checkmark-text text-sm font-medium">Pending</span>
+  </li>
+  <li role="option"
+      [attr.aria-selected]="checked === 'paid'"
+      (click)="onSelectStatus('paid')"
+      class="checkmark"
+      [class.selected]="checked === 'paid'">
+    <span class="checkmark-icon" app-icon [name]="checked === 'paid' ? 'check' : ''"></span>
+    <span class="checkmark-text text-sm font-medium">Paid</span>
+  </li>
+</ul>

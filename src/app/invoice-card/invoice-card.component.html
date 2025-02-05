@@ -1,0 +1,104 @@
+
+<button (click)="onClick()" class="back-button">
+  <span app-icon name="arrow-left"></span>
+  <span class="text-sm text-bold back-button-text">Go back</span>
+</button>
+
+<div class="card-container" *ngIf="!!invoiceData">
+
+  <div class="action-bar flex-row">
+    <div class="flex-row status">
+      <span class="text-sm dark-grey action-bar-text">Status</span>
+      <status-badge [badge]="invoiceData.status||'draft'" />
+    </div>
+
+    <div class="flex-row actions">
+      <button type="button" (click)="onEdit()" class="action-button" app-button buttonType="neutral" title="Edit" ></button>
+      <button type="button" (click)="onDelete()" class="action-button" app-button buttonType="danger" title="Delete" ></button>
+      <button type="button" (click)="markAsPaid(invoiceData.id)" [disabled]="invoiceData.status==='draft'" class="action-button" app-button buttonType="default" title="Mark as Paid" ></button>
+    </div>
+  </div>
+
+  <div class="details-container">
+    <div class="flex-row details-top-details">
+      <div>
+          <div class="text-bold details-text column" style="margin-bottom: 8px;">
+            <span class="dark-grey">#</span> <span>{{invoiceData.id}}</span>
+          </div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.description}}</div>
+      </div>
+      <div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.street}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.city}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.postCode}}</div>
+        <div class="details-text dark-grey text-sm">{{invoiceData.senderAddress.country}}</div>
+      </div>
+    </div>
+
+    <div class="flex-row details">
+        <div class="column">
+          <div>
+            <div class="details-text dark-grey text-sm">Invoice Date</div>
+            <div class="details-text text-md text-bold">{{formatDate(invoiceData.createdAt)}}</div>
+          </div>
+          <div style="margin-top: 30px;">
+            <div class="details-text dark-grey text-sm">Payment Due</div>
+            <div class="details-text text-md text-bold">{{formatDate(invoiceData.paymentDue)}}</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="details-text dark-grey text-sm">Bill To</div>
+          <div class="details-text text-md text-bold">{{invoiceData.clientName}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.street}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.city}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.postCode}}</div>
+          <div class="details-text dark-grey text-sm">{{invoiceData.clientAddress.country}}</div>
+        </div>
+        <div class="column">
+          <div>
+            <div class="details-text dark-grey text-sm">Sent To</div>
+            <div class="details-text text-md text-bold">{{invoiceData.clientEmail}}</div>
+          </div>
+        </div>
+    </div>
+
+    <div class="price-details">
+      <div class="grid-item-container price-details-item screen-large-grid">
+        <div class="grid-item-1 dark-grey text-sm">Item Name</div>
+          <div class="grid-item-2 column dark-grey text-sm">QTY</div>
+          <div class="grid-item-3 column dark-grey text-sm">Price</div>
+          <div class="grid-item-4 column dark-grey text-sm">Total</div>
+      </div>
+
+      @for (item of invoiceData.items; track item.name) {
+        <div class="grid-item-container price-details-item">
+          <div class="grid-item-1">
+            <div class="font-medium details-text">{{item.name}}</div>
+            <div class="details-text dark-grey font-medium screen-small">{{item.quantity}} x £ {{formatAmount(item.price)}}</div>
+          </div>
+            <div class="grid-item-2 text-sm column dark-grey font-medium screen-large">{{item.quantity}}</div>
+            <div class="grid-item-3 text-sm column dark-grey font-medium screen-large">£ {{formatAmount(item.price)}}</div>
+            <div class="grid-item-4 text-smolumn font-medium">£ {{formatAmount(item.total)}}</div>
+        </div>
+      }
+
+
+
+      <div class="price-total flex-row">
+        <div class="text-sm light-grey">Amount Due</div>
+        <div class="text-lg text-bold amount">£ {{formatAmount(calculateTotal(invoiceData.items))}}</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Loading Popup -->
+  <app-loader
+    *ngIf="loadingInvoiceData||noInternetConection"
+    [message]="loadingMessages"
+    [state]="noInternetConection?'retry':'load'"
+    (onRetry)="retry()"
+    [setBackground]="false"
+  />

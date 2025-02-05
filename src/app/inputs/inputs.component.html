@@ -1,0 +1,12 @@
+<label>
+  @if(!hideLabelText){
+    <div class="text-sm dark-grey form-text">{{inputTitle}}</div>
+  }
+  @if(typeof inputValue!=='undefined'){
+    <input (focus)="onFocused($event)" [value]="inputValue" [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''" [formControl]="formControl" />
+  }
+  @else {
+    <input (focus)="onFocused($event)" [title]="inputTitle" [placeholder]="placeHolder" (keyup)="onEnterKeyPressed($event)" [type]="inputType" [className]="errored?'error':''"  [formControl]="formControl"/>
+  }
+</label>
+

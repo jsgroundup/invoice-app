@@ -1,0 +1,15 @@
+<div class="dropdown-container">
+    <div class="dropdown-title text-sm dark-grey">Payment Terms</div>
+    <div class="dropdown-selected text-sm font-medium" (click)="onToggleDropdown()">
+        <span>{{ selectedOption||'Select an option' }}</span>
+        <span app-icon name="arrow-down"></span>
+    </div>
+
+    <ul class="dropdown-options" *ngIf="dropdownOpen">
+      @for (option of options; track option) {
+        <li class="dropdown-option text-sm font-medium" (click)="onSelectOption(option)">
+            {{ option }}
+        </li>
+      }
+    </ul>
+</div>

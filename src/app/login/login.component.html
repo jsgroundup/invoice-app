@@ -1,0 +1,34 @@
+
+  <form>
+
+    <section class="form-space" [formGroup]="form" >
+      <div class="form-header">
+        <h2 class="text-lg font-bold">Sign in</h2>
+        <p class="dark-grey text-md">Sign in to manage your invoices</p>
+      </div>
+
+      <div class="form-group" >
+        <app-input (onFocus)="onFocus()" inputTitle="Email" [errored]="!!controllErrored('email')" [formControl]="getFormControl('email')" inputType="text" />
+        <app-input (onFocus)="onFocus()" inputTitle="Password" [errored]="!!controllErrored('password')" [formControl]="getFormControl('password')" inputType="password" />
+        <div>
+          <button (click)="onSignIn()" type="button" class="action-button" app-button buttonType="default" title="Sign In" ></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="illustration-space">
+      <img aria-hidden="true" alt="Empty illustration image" src="../../assets/images/signup.gif" />
+      <div class="illustration-cover"></div>
+    </section>
+
+
+  </form>
+
+  <!-- Loading Popup -->
+  <app-loader
+    *ngIf="authenticating||loadingInvoices"
+    [message]="authenticating ? loadingMessages.authenticating:loadingMessages.loadingInvoices"
+    [state]="noInternetConection?'retry':'load'"
+    (onRetry)="retry()"
+    [setBackground]="true"
+  />

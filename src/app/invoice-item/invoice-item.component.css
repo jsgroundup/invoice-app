@@ -1,0 +1,109 @@
+
+ :host{
+  list-style: none;
+  border-radius: 8px;
+  background-color: var(--white-color);
+  margin-top: 15px;
+  border: 1.5px solid transparent;
+ }
+
+ :host:hover{
+  border: 1.5px solid rgb(var(--primary-color));
+ }
+
+ a {
+   padding: 10px 20px;
+   display: block;
+   border: none;
+   width: 100%;
+   text-align: start;
+   background-color: transparent;
+   cursor: pointer;
+   text-decoration: none;
+ }
+
+ .column {
+   margin-right: 20px;
+ }
+
+ .details {
+   width: calc(100% - 130px);
+ }
+
+ .flex-row {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-direction: row;
+ }
+
+ .status {
+   padding: 7px;
+   border-radius: 6px;
+   margin-right: 15px;
+   min-width: 70px;
+   justify-content: center;
+ }
+
+ .status .point {
+   width: 6px;
+   height: 6px;
+   border-radius: 100px;
+   margin-right: 6px;
+ }
+
+ /* Pending status styles */
+ .status.pending {
+   background-color: rgba(var(--pending-color), 0.1);
+ }
+
+ .status.pending .point {
+   background-color: rgb(var(--pending-color));
+ }
+
+ .status.pending .status-text {
+   color: rgb(var(--pending-color));
+ }
+
+ /* Paid status styles */
+ .status.paid {
+   background-color: rgba(var(--success-color), 0.1);
+ }
+
+ .status.paid .point {
+   background-color: rgb(var(--success-color));
+ }
+
+ .status.paid .status-text {
+   color: rgb(var(--success-color));
+ }
+
+ /* Draft status styles */
+ .status.draft {
+   background-color: var(--neutral-color);
+ }
+
+ .status.draft .point {
+   background-color: var(--sidebar-color);
+ }
+
+ .status.draft .status-text {
+   color: var(--sidebar-color);
+ }
+
+ .screen-large {
+   display: flex;
+ }
+
+ .screen-small {
+   display: none;
+ }
+
+ @media screen and (max-width: 510px) {
+  .screen-large{
+    display: none;
+  }
+  .screen-small {
+    display: block;
+  }
+ }

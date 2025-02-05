@@ -1,0 +1,100 @@
+.dropdown-container {
+  position: relative;
+  width: 200px;
+}
+
+.dropdown-label {
+  color: #4a56e2;
+  /* font-size: 14px; */
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.dropdown-selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid #DFE3FA; */
+  border: 1.5px solid var(--input-border-color);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  /* font-size: 14px; */
+  /* color: #333; */
+
+  /* transition: box-shadow 0.3s; */
+  margin-top: 12px;
+
+  /* font-size: 12px; */
+  /* font-weight: 700; */
+  line-height: 15px;
+  /* letter-spacing: -0.25px; */
+  text-align: left;
+  background-color: var(--input-bg);
+
+}
+
+.dropdown-title {
+  /* color: #7e88c3; */
+  /* font-size: 12px; */
+  /* font-weight: 400; */
+  line-height: 15px;
+  /* letter-spacing: -0.25px; */
+  text-align: left;
+
+}
+
+
+/* .dropdown-selected:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.dropdown-arrow {
+  font-size: 12px;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  border: none;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* z-index: 10; */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), 0px -4px 24px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+  /* background-color: #DFE3FA; */
+  background-color: var(--input-bg);
+
+}
+
+.dropdown-option {
+  padding: 12.5px 16px;
+  /* font-size: 14px; */
+  /* color: #333; */
+  cursor: pointer;
+  /* border-bottom: 1px solid #eee;
+  transition: background 0.3s, color 0.3s; */
+  /* border-bottom: 1px solid #DFE3FA; */
+  /* margin-top: 0.9px; */
+  /* background-color: var(--white); */
+  /* border: 0.5px solid var(--input-border-color); */
+  background-color: transparent;
+
+}
+
+.dropdown-option:hover {
+  background: rgba(74, 87, 226, 0.03);
+  /* Light purple hover */
+  color: #4a56e2;
+  /* Blue text hover */
+}
+
+.dropdown-option:last-child {
+  border-bottom: none;
+}
